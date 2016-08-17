@@ -82,13 +82,15 @@
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
             android:text="Desc" />
 
-        <EditText
-            android:id="@+id/etDesc"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:padding="6dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:background="@drawable/rect_tvdesc"
+            android:clickable="true"
             android:text="Me"/>
 
     </GridLayout>

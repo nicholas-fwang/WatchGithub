@@ -1,5 +1,7 @@
 package io.fisache.watchgithub.ui.userdetail;
 
+import android.support.v7.app.AlertDialog;
+
 import dagger.Module;
 import dagger.Provides;
 import io.fisache.watchgithub.data.UsersManager;
@@ -32,5 +34,11 @@ public class UserDetailActivityModule {
     @ActivityScope
     UserDetailActivityPresenter provideUserDetailActivityPresenter(UsersManager usersManager) {
         return new UserDetailActivityPresenter(userDetailActivity, usersManager, user);
+    }
+
+    @Provides
+    @ActivityScope
+    AlertDialog.Builder provideAlertDialogBuilder() {
+        return new AlertDialog.Builder(userDetailActivity);
     }
 }

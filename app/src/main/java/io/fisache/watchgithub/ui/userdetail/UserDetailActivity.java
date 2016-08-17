@@ -1,11 +1,13 @@
 package io.fisache.watchgithub.ui.userdetail;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,8 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jakewharton.rxbinding.widget.RxTextView;
-import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -28,8 +28,6 @@ import io.fisache.watchgithub.base.AnalyticsManager;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.User;
-import rx.Subscription;
-import rx.functions.Action1;
 
 public class UserDetailActivity extends BaseActivity {
     private static final String ARG_USER = "arg_user";
@@ -42,8 +40,8 @@ public class UserDetailActivity extends BaseActivity {
     TextView tvName;
     @Bind(R.id.tvEmail)
     TextView tvEmail;
-    @Bind(R.id.etDesc)
-    EditText etDesc;
+    @Bind(R.id.tvDesc)
+    TextView tvDesc;
     @Bind(R.id.btnEdit)
     FloatingActionButton btnEdit;
     @Bind(R.id.toolbar)
@@ -53,10 +51,10 @@ public class UserDetailActivity extends BaseActivity {
     AnalyticsManager analyticsManager;
     @Inject
     UserDetailActivityPresenter presenter;
+    @Inject
+    AlertDialog.Builder editDialog;
 
     private User user;
-
-    private Subscription textChangeSubscription;
 
     public static void startWithUser(User user, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, UserDetailActivity.class);
@@ -76,13 +74,6 @@ public class UserDetailActivity extends BaseActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
         ab.setTitle(user.login);
-
-        textChangeSubscription = RxTextView.textChangeEvents(etDesc).subscribe(new Action1<TextViewTextChangeEvent>() {
-            @Override
-            public void call(TextViewTextChangeEvent textViewTextChangeEvent) {
-                presenter.userDesc = textViewTextChangeEvent.text().toString();
-            }
-        });
 
         analyticsManager.logScreenView(getClass().getName());
 
@@ -134,10 +125,36 @@ public class UserDetailActivity extends BaseActivity {
         tvName.setText(user.name);
         tvEmail.setText(user.email);
         if(user.desc == null) {
-            etDesc.setHint("Write about user..");
+            tvDesc.setHint("Write about user..");
         } else {
-            etDesc.setText(user.desc);
+            tvDesc.setText(user.desc);
         }
+    }
+
+    @OnClick(R.id.tvDesc)
+    public void onEditDialog() {
+        editDialog.setTitle("Add Your Description");
+        editDialog.setMessage("Be sure to enter");
+
+        final EditText etDesc = new EditText(this);
+        editDialog.setView(etDesc);
+
+        editDialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String desc = etDesc.getText().toString();
+                if(!desc.isEmpty()) {
+                    presenter.userDesc = desc;
+                    tvDesc.setText(desc);
+                }
+            }
+        });
+
+        editDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        editDialog.show();
     }
 
     @OnClick(R.id.btnEdit)
@@ -148,6 +165,7 @@ public class UserDetailActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        textChangeSubscription.unsubscribe();
+//        textChangeSubscription.unsubscribe();
     }
+
 }
