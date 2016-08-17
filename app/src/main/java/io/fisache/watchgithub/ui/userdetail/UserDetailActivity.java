@@ -85,6 +85,8 @@ public class UserDetailActivity extends BaseActivity {
         });
 
         analyticsManager.logScreenView(getClass().getName());
+
+        
     }
 
     @Override
@@ -99,6 +101,9 @@ public class UserDetailActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.itUserDelete :
                 presenter.deleteUser();
+                break;
+            case android.R.id.home :
+                onBackPressed();
                 break;
         }
         return true;
@@ -144,11 +149,5 @@ public class UserDetailActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         textChangeSubscription.unsubscribe();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return super.onSupportNavigateUp();
     }
 }

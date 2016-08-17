@@ -19,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.userslist.UsersListActivity" />
-        <activity android:name=".ui.userdetail.UserDetailActivity" />
+        <activity android:name=".ui.userslist.UsersListActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.userdetail.UserDetailActivity"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

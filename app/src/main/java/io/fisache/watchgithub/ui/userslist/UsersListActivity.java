@@ -1,8 +1,10 @@
 package io.fisache.watchgithub.ui.userslist;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import java.util.List;
@@ -18,6 +21,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.AnalyticsManager;
 import io.fisache.watchgithub.base.BaseActivity;
@@ -53,6 +57,8 @@ public class UsersListActivity extends BaseActivity {
     UsersListAdapter usersListAdapter;
     @Inject
     LinearLayoutManager linearLayoutManager;
+    @Inject
+    AlertDialog.Builder addAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,5 +149,27 @@ public class UsersListActivity extends BaseActivity {
     public void finish() {
         super.finish();
         BaseApplication.get(this).releaseGroupComponent();
+    }
+
+    @OnClick(R.id.btnAdd)
+    public void onUserAddDialog() {
+        addAlertDialog.setTitle("Add Github ID");
+        addAlertDialog.setMessage("Be sure to enter");
+
+        final EditText etLogin = new EditText(this);
+        addAlertDialog.setView(etLogin);
+
+        addAlertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // TODO : github
+            }
+        });
+
+        addAlertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+            }
+        });
+        addAlertDialog.show();
     }
 }

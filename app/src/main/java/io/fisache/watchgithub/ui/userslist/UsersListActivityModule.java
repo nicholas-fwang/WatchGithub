@@ -1,6 +1,8 @@
 package io.fisache.watchgithub.ui.userslist;
 
+import android.app.Dialog;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 
 import dagger.Module;
@@ -38,5 +40,11 @@ public class UsersListActivityModule {
     @ActivityScope
     LinearLayoutManager provideLinearLayoutManager() {
         return new LinearLayoutManager(usersListActivity);
+    }
+
+    @Provides
+    @ActivityScope
+    AlertDialog.Builder provideAlerDialogBuilder() {
+        return new AlertDialog.Builder(usersListActivity);
     }
 }
