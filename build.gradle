@@ -46,6 +46,7 @@ ext {
     final RXANDROID_VERSION = '1.1.0'
     final RXBINDING_VERSION = '0.2.0'
     final GUAVA_VERSION = '18.0'
+    final BUTTERKNIFE_VERSION = '7.0.1'
 
     dagger = "com.google.dagger:dagger:${DAGGER_VERSION}"
     daggerCompiler = "com.google.dagger:dagger-compiler:${DAGGER_VERSION}"
@@ -53,6 +54,7 @@ ext {
     rxandroid = "io.reactivex:rxandroid:${RXANDROID_VERSION}"
     javax = "org.glassfish:javax.annotation:10.0-b28"
     guava = "com.google.guava:guava:${GUAVA_VERSION}"
+    butterKnife = "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
 
     // Data dependencies
     final SQLBRITE_VERSION = '0.6.3'
@@ -62,6 +64,7 @@ ext {
     // TODO : add firebase
 
     sqlbrite = "com.squareup.sqlbrite:sqlbrite:${SQLBRITE_VERSION}"
+    picasso = "com.squareup.picasso:picasso:${PICASSO_VERSION}"
 
     // Test dependencies
     final TIMBER_VERSION = '4.1.2'

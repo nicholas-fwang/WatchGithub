@@ -14,20 +14,27 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
-    public String login;
     public long id;
-    public String avartar_url;
+    public String login;
+    public String name;
+    public String avatar_url;
     public String email;
     @Nullable public String desc;
 
-    public User() {
-
+    public User(long id, String login, String name, String avatar_url, String email, String desc) {
+        this.id = id;
+        this.login = login;
+        this.name = name;
+        this.avatar_url = avatar_url;
+        this.email = email;
+        this.desc = desc;
     }
 
     protected User(Parcel in) {
-        this.login = in.readString();
         this.id = in.readLong();
-        this.avartar_url = in.readString();
+        this.login = in.readString();
+        this.name = in.readString();
+        this.avatar_url = in.readString();
         this.email = in.readString();
         this.desc = in.readString();
     }
@@ -39,9 +46,10 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(login);
         dest.writeLong(id);
-        dest.writeString(avartar_url);
+        dest.writeString(login);
+        dest.writeString(name);
+        dest.writeString(avatar_url);
         dest.writeString(email);
         dest.writeString(desc);
     }
