@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_user_height"
+    android:layout_marginLeft="@dimen/item_user_horizontal_margin"
+    android:layout_marginTop="@dimen/item_user_vertical_margin"
+    android:layout_marginRight="@dimen/item_user_horizontal_margin"
+    android:layout_marginBottom="@dimen/item_user_vertical_margin"
+    >
+
+    <ImageView
+        android:id="@+id/ivAvatar"
+        android:layout_width="@dimen/item_user_avatar_size"
+        android:layout_height="@dimen/item_user_avatar_size"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/item_user_horizontal_margin"
+        android:src="@drawable/ic_face" />
+
+    <RelativeLayout
+        android:id="@+id/llInfo"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/item_user_horizontal_margin"
+        android:layout_toRightOf="@id/ivAvatar"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="Github Login"/>
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLogin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:text="me"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/llInfo">
+        <ImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:clickable="true"
+            android:src="@drawable/ic_setting"/>
+    </FrameLayout>
+</RelativeLayout>

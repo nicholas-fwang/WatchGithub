@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_face"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/frag_detail_padding"
+        android:layout_marginLeft="@dimen/frag_detail_padding"
+        android:rowCount="4"
+        android:columnCount="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/frag_detail_profile_padding"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="User ID" />
+
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="fisache"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:layout_marginRight="@dimen/frag_detail_profile_padding"
+            android:text="Name" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="Inki Hwang"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginRight="@dimen/frag_detail_profile_padding"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="E-mail" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="hwang031451@gmail.com"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginRight="@dimen/frag_detail_profile_padding"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="Desc" />
+
+        <EditText
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="Me"/>
+
+    </GridLayout>
+
+</LinearLayout>

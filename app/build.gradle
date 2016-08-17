@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "io.fisache.watchgithub"
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
+}
+
+dependencies {
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Android dependencies
+    compile rootProject.ext.supportV7
+    compile rootProject.ext.supportDesign
+    compile rootProject.ext.supportRecycler
+
+    apt rootProject.ext.daggerCompiler
+    provided rootProject.ext.javax
+    compile rootProject.ext.dagger
+
+    compile rootProject.ext.timber
+    compile rootProject.ext.rxjava
+    compile rootProject.ext.rxandroid
+    compile rootProject.ext.guava
+
+    // Data dependencies
+    compile rootProject.ext.sqlbrite
+
+    // Test dependencies
+    testCompile rootProject.ext.junit
+    testCompile rootProject.ext.assertjCore
+    testCompile rootProject.ext.robolectric
+    testCompile rootProject.ext.roboShadow
+    testCompile rootProject.ext.mockito
+
+    // Android Test dependencies
+    androidTestCompile rootProject.ext.supportAnnotations
+    androidTestCompile rootProject.ext.supportTestRunner
+    androidTestCompile rootProject.ext.androidTestRule
+    androidTestCompile rootProject.ext.espresso
+
+    // In-repo dependencies
+    // compile project(':projectName')
+}

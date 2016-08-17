@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/tvRepoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginBottom="@dimen/frag_detail_repo_margin"
+        android:text="spring-framwork"/>
+
+    <TextView
+        android:id="@+id/tvRepoUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginBottom="@dimen/frag_detail_repo_margin"
+        android:text="https://github.com/fisache/spring-framework"/>
+
+    <TextView
+        android:id="@+id/tvForkStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginBottom="@dimen/frag_detail_repo_margin"
+        android:text="263 forked, 516 star"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginBottom="@dimen/frag_detail_repo_margin"
+        android:text="Original Repository"/>
+    <TextView
+        android:id="@+id/tvOriginalRepoUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:text="https://github.com/spring-projects/spring-framework"/>
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginBottom="@dimen/item_repo_vertical_margin"
+    android:layout_marginTop="@dimen/item_repo_vertical_margin"
+    android:layout_marginRight="@dimen/item_user_horizontal_margin"
+    android:layout_marginLeft="@dimen/item_user_horizontal_margin">
+
+    <TextView
+        android:id="@+id/tvRepoName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginBottom="@dimen/item_repo_vertical_margin"
+        android:text="spring-framework"/>
+
+    <TextView
+        android:id="@+id/tvRepoUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRepoName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginBottom="@dimen/item_repo_vertical_margin"
+        android:text="https://github.com/fisache/spring-framework"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvRepoUrl"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/item_user_horizontal_margin"
+            android:src="@drawable/ic_forked"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:text="Forked"/>
+
+    </LinearLayout>
+</RelativeLayout>
