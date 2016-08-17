@@ -22,6 +22,8 @@ public class User implements Parcelable {
     public int followers;
     @Nullable public String desc;
 
+    public User(){}
+
     public User(long id, String login, String name, String avatar_url, String email, int followers, String desc) {
         this.id = id;
         this.login = login;

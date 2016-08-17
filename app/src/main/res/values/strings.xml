@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WatchGithub</string>
+    <string name="github_endpoint">https://api.github.com</string>
 </resources>

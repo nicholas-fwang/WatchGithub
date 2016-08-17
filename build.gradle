@@ -61,11 +61,14 @@ ext {
     final SQLBRITE_VERSION = '0.6.3'
     final PICASSO_VERSION = '2.5.2'
     final GLIDE_VERSION = '3.7.0'
-    final RETROFIT_VERSION = '2.1.0'
+    final RETROFIT_VERSION = '2.0.0-beta3'
     // TODO : add firebase
 
     sqlbrite = "com.squareup.sqlbrite:sqlbrite:${SQLBRITE_VERSION}"
     picasso = "com.squareup.picasso:picasso:${PICASSO_VERSION}"
+    retrofit = "com.squareup.retrofit2:retrofit:${RETROFIT_VERSION}"
+    adapterrx = "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_VERSION}"
+    gson = "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
 
     // Test dependencies
     final TIMBER_VERSION = '4.1.2'

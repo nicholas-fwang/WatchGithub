@@ -3,7 +3,9 @@ package io.fisache.watchgithub.ui.userslist;
 import java.util.List;
 
 import io.fisache.watchgithub.base.BasePresenter;
+import io.fisache.watchgithub.base.Validator;
 import io.fisache.watchgithub.data.UsersManager;
+import io.fisache.watchgithub.data.github.GithubApiManager;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
 import rx.Observer;
@@ -16,12 +18,17 @@ import rx.subscriptions.CompositeSubscription;
 public class UsersListActivityPresenter implements BasePresenter {
     private UsersListActivity activity;
     private UsersManager usersManager;
+    private GithubApiManager githubApiManager;
+    private Validator validator;
 
     private CompositeSubscription subscription;
 
-    public UsersListActivityPresenter(UsersListActivity activity, UsersManager usersManager) {
+    public UsersListActivityPresenter(UsersListActivity activity, UsersManager usersManager,
+                                      GithubApiManager githubApiManager, Validator validator) {
         this.activity = activity;
         this.usersManager = usersManager;
+        this.githubApiManager = githubApiManager;
+        this.validator = validator;
         subscription = new CompositeSubscription();
     }
 
@@ -82,6 +89,32 @@ public class UsersListActivityPresenter implements BasePresenter {
         } else {
             activity.setUsers(users);
             activity.showExistUsers();
+        }
+    }
+
+    public void enterGithubUser(String username) {
+        if(validator.vaildUsername(username)) {
+            activity.showLoading(true);
+            githubApiManager.getGithubUser(username).subscribe(new Observer<User>() {
+                @Override
+                public void onCompleted() {
+                    activity.showLoading(false);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    activity.showLoading(false);
+                    activity.showVaildationError();
+                }
+
+                @Override
+                public void onNext(User user) {
+                    usersManager.saveUser(user);
+                    setUsers();
+                }
+            });
+        } else {
+            activity.showVaildationError();
         }
     }
 }

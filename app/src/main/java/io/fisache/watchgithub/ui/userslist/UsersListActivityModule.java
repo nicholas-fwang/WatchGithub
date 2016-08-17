@@ -1,13 +1,13 @@
 package io.fisache.watchgithub.ui.userslist;
 
-import android.app.Dialog;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 
 import dagger.Module;
 import dagger.Provides;
+import io.fisache.watchgithub.base.Validator;
 import io.fisache.watchgithub.data.UsersManager;
+import io.fisache.watchgithub.data.github.GithubApiManager;
 import io.fisache.watchgithub.scope.ActivityScope;
 
 @Module
@@ -26,8 +26,10 @@ public class UsersListActivityModule {
 
     @Provides
     @ActivityScope
-    UsersListActivityPresenter provideUsersListActivityPresenter(UsersManager usersManager) {
-        return new UsersListActivityPresenter(usersListActivity, usersManager);
+    UsersListActivityPresenter provideUsersListActivityPresenter(UsersManager usersManager,
+                                                                 GithubApiManager githubApiManager,
+                                                                 Validator validator) {
+        return new UsersListActivityPresenter(usersListActivity, usersManager, githubApiManager, validator);
     }
 
     @Provides

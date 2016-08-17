@@ -32,11 +32,6 @@
                 android:layout_height="match_parent"
                 layout="@layout/content_user_list"/>
 
-            <ProgressBar
-                android:id="@+id/pbLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"

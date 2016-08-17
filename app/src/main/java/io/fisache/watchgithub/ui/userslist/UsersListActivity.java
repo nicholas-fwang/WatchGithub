@@ -3,11 +3,13 @@ package io.fisache.watchgithub.ui.userslist;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -161,7 +163,7 @@ public class UsersListActivity extends BaseActivity {
 
         addAlertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                // TODO : github
+                presenter.enterGithubUser(etLogin.getText().toString());
             }
         });
 
@@ -171,5 +173,9 @@ public class UsersListActivity extends BaseActivity {
             }
         });
         addAlertDialog.show();
+    }
+
+    public void showVaildationError() {
+        Snackbar.make(findViewById(android.R.id.content), "Write down exactly", Snackbar.LENGTH_LONG).show();
     }
 }

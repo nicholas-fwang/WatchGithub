@@ -48,6 +48,9 @@ dependencies {
     // Data dependencies
     compile rootProject.ext.sqlbrite
     compile rootProject.ext.picasso
+    compile rootProject.ext.retrofit
+    compile rootProject.ext.adapterrx
+    compile rootProject.ext.gson
 
     // Test dependencies
     testCompile rootProject.ext.junit

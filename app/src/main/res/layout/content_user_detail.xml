@@ -91,7 +91,7 @@
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
             android:background="@drawable/rect_tvdesc"
             android:clickable="true"
-            android:text="Me"/>
+            android:text=""/>
 
     </GridLayout>
 
