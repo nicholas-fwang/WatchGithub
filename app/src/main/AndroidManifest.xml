@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.userslist.UsersListActivity" />
+        <activity android:name=".ui.userdetail.UserDetailActivity" />
     </application>
 
 </manifest>

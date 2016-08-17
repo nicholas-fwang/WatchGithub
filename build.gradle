@@ -55,6 +55,7 @@ ext {
     javax = "org.glassfish:javax.annotation:10.0-b28"
     guava = "com.google.guava:guava:${GUAVA_VERSION}"
     butterKnife = "com.jakewharton:butterknife:${BUTTERKNIFE_VERSION}"
+    rxbinding = "com.jakewharton.rxbinding:rxbinding:${RXBINDING_VERSION}"
 
     // Data dependencies
     final SQLBRITE_VERSION = '0.6.3'

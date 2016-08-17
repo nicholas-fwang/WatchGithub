@@ -1,5 +1,6 @@
 package io.fisache.watchgithub.ui.userslist;
 
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,9 @@ import io.fisache.watchgithub.data.model.User;
 
 public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
+    private final int NORMAL = 0;
+    private final int POPULAR = 1;
+
     private UsersListActivity usersListActivity;
 
     private final List<User> users = new ArrayList<>();
@@ -27,6 +31,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_user, parent, false);
+        if(viewType == POPULAR) {
+                itemView.setBackgroundColor(usersListActivity.getResources().getColor(R.color.colorOrange));
+        }
         return new UsersListHolder(itemView);
     }
 
@@ -54,6 +61,15 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void onUserSettingClicked(int adapterPosition) {
         usersListActivity.onUserSettingClicked(users.get(adapterPosition));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(users.get(position).followers >= 150) {
+            return POPULAR;
+        } else {
+            return NORMAL;
+        }
     }
 
     @Override

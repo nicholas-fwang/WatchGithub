@@ -43,6 +43,7 @@ dependencies {
     compile rootProject.ext.rxandroid
     compile rootProject.ext.guava
     compile rootProject.ext.butterKnife
+    compile rootProject.ext.rxbinding
 
     // Data dependencies
     compile rootProject.ext.sqlbrite

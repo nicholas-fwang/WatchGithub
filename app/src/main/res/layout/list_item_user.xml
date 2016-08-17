@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlUserItem"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_user_height"
-    android:layout_marginLeft="@dimen/item_user_horizontal_margin"
-    android:layout_marginTop="@dimen/item_user_vertical_margin"
-    android:layout_marginRight="@dimen/item_user_horizontal_margin"
-    android:layout_marginBottom="@dimen/item_user_vertical_margin"
+    android:paddingLeft="@dimen/item_user_horizontal_margin"
+    android:paddingRight="@dimen/item_user_horizontal_margin"
     >
 
     <ImageView

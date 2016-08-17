@@ -1,6 +1,7 @@
 package io.fisache.watchgithub.ui.userslist;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import io.fisache.watchgithub.base.AnalyticsManager;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.ui.userdetail.UserDetailActivity;
 
 public class UsersListActivity extends BaseActivity {
 
@@ -39,6 +41,9 @@ public class UsersListActivity extends BaseActivity {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.btnAdd)
+    FloatingActionButton btnAdd;
 
     @Inject
     UsersListActivityPresenter presenter;
@@ -131,8 +136,7 @@ public class UsersListActivity extends BaseActivity {
     }
 
     public void onUserSettingClicked(User user) {
-        // TODO : User detail View Intent
-        // createGroupComponent
+        UserDetailActivity.startWithUser(user, this);
     }
 
     @Override

@@ -27,6 +27,9 @@ public class UsersListActivityPresenter implements BasePresenter {
 
     @Override
     public void subscribe() {
+        if(subscription == null) {
+            subscription = new CompositeSubscription();
+        }
         setUsers();
     }
 
@@ -74,7 +77,7 @@ public class UsersListActivityPresenter implements BasePresenter {
     }
 
     private void processUsers(List<User> users) {
-        if(users == null) {
+        if(users.isEmpty()) {
             activity.showNotExistUsers();
         } else {
             activity.setUsers(users);

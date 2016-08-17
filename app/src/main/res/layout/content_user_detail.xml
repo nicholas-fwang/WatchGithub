@@ -9,9 +9,12 @@
     android:layout_marginRight="@dimen/activity_horizontal_margin">
 
     <ImageView
+        android:id="@+id/ivAvatar"
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/frag_detail_photo_padding"
+        android:layout_marginBottom="@dimen/frag_detail_photo_padding"
         android:src="@drawable/ic_face"/>
 
     <GridLayout
@@ -32,7 +35,7 @@
             android:text="User ID" />
 
         <TextView
-            android:id="@+id/tvId"
+            android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
@@ -80,9 +83,10 @@
             android:text="Desc" />
 
         <EditText
-            android:id="@+id/tvDesc"
-            android:layout_width="wrap_content"
+            android:id="@+id/etDesc"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
             android:text="Me"/>

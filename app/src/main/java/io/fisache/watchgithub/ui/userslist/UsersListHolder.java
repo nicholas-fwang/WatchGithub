@@ -20,6 +20,8 @@ public class UsersListHolder extends RecyclerView.ViewHolder {
     TextView tvDesc;
     @Bind(R.id.ivSetting)
     ImageView ivSetting;
+    @Bind(R.id.rlUserItem)
+    View rlUserItem;
 
     public UsersListHolder(View itemView) {
         super(itemView);
