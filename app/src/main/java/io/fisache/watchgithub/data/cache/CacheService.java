@@ -17,9 +17,9 @@ public class CacheService implements BaseService {
 
     static {
         USER_CACHE_DATA = new LinkedHashMap<>();
-        addUser(25673, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/15536270?v=3", "hwang031451@gmail.com", 1,"Me");
-        addUser(25670, "pivotal", "inki hwang", "https://avatars.githubusercontent.com/u/9148?v=3", "hwang031451@gmail.com", 150,"desire");
-        addUser(25612, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/1342004?v=3", "hwang031451@gmail.com", 300,"desire");
+//        addUser(25673, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/15536270?v=3", "hwang031451@gmail.com", 1,"Me");
+//        addUser(25670, "pivotal", "inki hwang", "https://avatars.githubusercontent.com/u/9148?v=3", "hwang031451@gmail.com", 150,"desire");
+//        addUser(25612, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/1342004?v=3", "hwang031451@gmail.com", 300,"desire");
     }
 
     public static void addUser(long id, String login, String name, String avatar_url, String email, int followers, String desc) {

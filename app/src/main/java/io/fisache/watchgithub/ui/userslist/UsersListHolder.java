@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import io.fisache.watchgithub.R;
@@ -20,6 +22,8 @@ public class UsersListHolder extends RecyclerView.ViewHolder {
     TextView tvDesc;
     @Bind(R.id.ivSetting)
     ImageView ivSetting;
+    @Bind(R.id.tvType)
+    TextView tvType;
     @Bind(R.id.rlUserItem)
     View rlUserItem;
 
@@ -31,5 +35,10 @@ public class UsersListHolder extends RecyclerView.ViewHolder {
     public void bind(User user) {
         tvLogin.setText(user.login);
         tvDesc.setText(user.desc);
+        if(tvType.equals("User")) {
+            tvType.setText("[USR]");
+        } else {
+            tvType.setText("[ORG]");
+        }
     }
 }

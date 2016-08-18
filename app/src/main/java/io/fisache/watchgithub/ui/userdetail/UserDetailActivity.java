@@ -42,6 +42,8 @@ public class UserDetailActivity extends BaseActivity {
     TextView tvEmail;
     @Bind(R.id.tvDesc)
     TextView tvDesc;
+    @Bind(R.id.tvType)
+    TextView tvType;
     @Bind(R.id.btnEdit)
     FloatingActionButton btnEdit;
     @Bind(R.id.toolbar)
@@ -124,6 +126,7 @@ public class UserDetailActivity extends BaseActivity {
         tvLogin.setText(user.login);
         tvName.setText(user.name);
         tvEmail.setText(user.email);
+        tvType.setText(user.type);
         if(user.desc == null) {
             tvDesc.setHint("Write about user..");
         } else {

@@ -20,17 +20,19 @@ public class User implements Parcelable {
     public String avatar_url;
     public String email;
     public int followers;
+    public String type;
     @Nullable public String desc;
 
     public User(){}
 
-    public User(long id, String login, String name, String avatar_url, String email, int followers, String desc) {
+    public User(long id, String login, String name, String avatar_url, String email, int followers, String type, String desc) {
         this.id = id;
         this.login = login;
         this.name = name;
         this.avatar_url = avatar_url;
         this.email = email;
         this.followers = followers;
+        this.type = type;
         this.desc = desc;
     }
 
@@ -41,6 +43,7 @@ public class User implements Parcelable {
         this.avatar_url = in.readString();
         this.email = in.readString();
         this.followers = in.readInt();
+        this.type = in.readString();
         this.desc = in.readString();
     }
 
@@ -57,6 +60,7 @@ public class User implements Parcelable {
         dest.writeString(avatar_url);
         dest.writeString(email);
         dest.writeInt(followers);
+        dest.writeString(type);
         dest.writeString(desc);
     }
 }

@@ -25,6 +25,7 @@ public class GithubUserManager {
                         user.avatar_url = userResponse.avatar_url;
                         user.email = userResponse.email;
                         user.followers = userResponse.followers;
+                        user.type = userResponse.type;
                         return user;
                     }
                 })

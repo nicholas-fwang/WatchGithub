@@ -23,7 +23,7 @@
         android:layout_gravity="center"
         android:layout_marginRight="@dimen/frag_detail_padding"
         android:layout_marginLeft="@dimen/frag_detail_padding"
-        android:rowCount="4"
+        android:rowCount="5"
         android:columnCount="2">
 
         <TextView
@@ -73,6 +73,23 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
             android:text="hwang031451@gmail.com"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginRight="@dimen/frag_detail_profile_padding"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="Type" />
+
+        <TextView
+            android:id="@+id/tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginRight="@dimen/frag_detail_profile_padding"
+            android:layout_marginBottom="@dimen/frag_detail_profile_padding"
+            android:text="User" />
 
         <TextView
             android:layout_width="wrap_content"
