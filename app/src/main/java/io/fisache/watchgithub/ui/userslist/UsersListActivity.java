@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -101,7 +102,8 @@ public class UsersListActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.itUserFilter :
-                break;
+                popUpUserMenuFilter();
+                return true;
             default :
                 break;
         }
@@ -180,4 +182,33 @@ public class UsersListActivity extends BaseActivity {
     public void showVaildationError() {
         Snackbar.make(findViewById(android.R.id.content), "Write down exactly", Snackbar.LENGTH_LONG).show();
     }
+
+    private void popUpUserMenuFilter() {
+        PopupMenu popup = new PopupMenu(this, this.findViewById(R.id.itUserFilter));
+        popup.getMenuInflater().inflate(R.menu.filter_user, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.filterUserAll:
+                        presenter.setFilter(UserFilterType.ALL);
+                        break;
+                    case R.id.filterUserPopular:
+                        presenter.setFilter(UserFilterType.POPULAR);
+                        break;
+                    case R.id.filterUserUser:
+                        presenter.setFilter(UserFilterType.USER);
+                        break;
+                    case R.id.filterUserOrg:
+                        presenter.setFilter(UserFilterType.ORG);
+                        break;
+                }
+                presenter.setUsers();
+                return true;
+            }
+        });
+        popup.show();
+    }
+
+
 }

@@ -23,6 +23,8 @@ public class UsersListActivityPresenter implements BasePresenter {
 
     private CompositeSubscription subscription;
 
+    private UserFilterType userFilterType = UserFilterType.ALL;
+
     public UsersListActivityPresenter(UsersListActivity activity, UsersManager usersManager,
                                       GithubUserManager githubUserManager, Validator validator) {
         this.activity = activity;
@@ -58,7 +60,17 @@ public class UsersListActivityPresenter implements BasePresenter {
                 .filter(new Func1<User, Boolean>() {
                     @Override
                     public Boolean call(User user) {
-                        return true;
+                        switch (userFilterType) {
+                            case POPULAR:
+                                return user.followers >= 150 ? true : false;
+                            case USER:
+                                return user.type.equals("User");
+                            case ORG:
+                                return user.type.equals("Organization");
+                            case ALL:
+                            default:
+                                return true;
+                        }
                     }
                 })
                 .toList()
@@ -116,5 +128,9 @@ public class UsersListActivityPresenter implements BasePresenter {
         } else {
             activity.showVaildationError();
         }
+    }
+
+    void setFilter(UserFilterType type) {
+        userFilterType = type;
     }
 }

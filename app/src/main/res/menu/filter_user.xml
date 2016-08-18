@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/filterUserAll"
+        android:title="ALL"/>
+    <item
+        android:id="@+id/filterUserPopular"
+        android:title="POPULAR" />
+    <item
+        android:id="@+id/filterUserUser"
+        android:title="USER" />
+    <item
+        android:id="@+id/filterUserOrg"
+        android:title="ORG" />
+</menu>
