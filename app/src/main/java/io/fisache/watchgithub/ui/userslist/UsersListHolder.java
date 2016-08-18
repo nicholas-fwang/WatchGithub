@@ -23,8 +23,6 @@ public class UsersListHolder extends RecyclerView.ViewHolder {
     TextView tvDesc;
     @Bind(R.id.ivSetting)
     ImageView ivSetting;
-    @Bind(R.id.tvType)
-    TextView tvType;
     @Bind(R.id.rlUserItem)
     View rlUserItem;
 
@@ -37,11 +35,6 @@ public class UsersListHolder extends RecyclerView.ViewHolder {
         tvLogin.setText(user.login);
         if(user.desc != null) {
             tvDesc.setText(user.desc);
-        }
-        if(user.type.equals("User")) {
-            tvType.setText("[USR]");
-        } else {
-            tvType.setText("[ORG]");
         }
     }
 }

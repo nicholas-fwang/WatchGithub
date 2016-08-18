@@ -12,15 +12,27 @@
         android:id="@+id/tvRepoName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:layout_marginBottom="@dimen/item_repo_vertical_margin"
         android:text="spring-framework"/>
 
     <TextView
-        android:id="@+id/tvRepoUrl"
+        android:id="@+id/tvDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvRepoName"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginBottom="@dimen/item_repo_vertical_margin"
+        android:hint="Nothing about description.."/>
+
+    <TextView
+        android:id="@+id/tvRepoUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDesc"
+        android:singleLine="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_marginBottom="@dimen/item_repo_vertical_margin"
         android:text="https://github.com/fisache/spring-framework"/>

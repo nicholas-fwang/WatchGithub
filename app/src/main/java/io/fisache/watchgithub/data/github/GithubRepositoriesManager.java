@@ -31,7 +31,7 @@ public class GithubRepositoriesManager {
                             repository.name = repositoryResponse.name;
                             repository.desc = repositoryResponse.description;
                             repository.fork = repositoryResponse.fork;
-                            repository.url = repositoryResponse.url;
+                            repository.html_url = repositoryResponse.html_url;
                             repository.fork_count = repositoryResponse.forks_count;
                             repository.star_count = repositoryResponse.stargazers_count;
                             list.add(repository);

@@ -17,7 +17,7 @@ public class Repository implements Parcelable {
 
     public long id;
     public String name;
-    public String url;
+    public String html_url;
     public String desc;
     public int star_count;
     public int fork_count;
@@ -30,7 +30,7 @@ public class Repository implements Parcelable {
     protected Repository(Parcel in) {
         id = in.readLong();
         name = in.readString();
-        url = in.readString();
+        html_url = in.readString();
         desc = in.readString();
         star_count = in.readInt();
         fork_count = in.readInt();
@@ -46,7 +46,7 @@ public class Repository implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(name);
-        dest.writeString(url);
+        dest.writeString(html_url);
         dest.writeString(desc);
         dest.writeInt(star_count);
         dest.writeInt(fork_count);

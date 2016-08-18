@@ -18,6 +18,7 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private final int NORMAL = 0;
     private final int POPULAR = 1;
+    private final int ORGANIZATION = 2;
 
     private UsersListActivity usersListActivity;
 
@@ -31,8 +32,15 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_user, parent, false);
-        if(viewType == POPULAR) {
+        switch (viewType) {
+            case NORMAL :
+                break;
+            case POPULAR :
                 itemView.setBackgroundColor(usersListActivity.getResources().getColor(R.color.colorOrange));
+                break;
+            case ORGANIZATION :
+                itemView.setBackgroundColor(usersListActivity.getResources().getColor(R.color.colorGreen));
+                break;
         }
         return new UsersListHolder(itemView);
     }
@@ -65,7 +73,9 @@ public class UsersListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public int getItemViewType(int position) {
-        if(users.get(position).followers >= 150) {
+        if(users.get(position).type.equals("Organization")) {
+            return ORGANIZATION;
+        } else if(users.get(position).followers >= 150) {
             return POPULAR;
         } else {
             return NORMAL;
