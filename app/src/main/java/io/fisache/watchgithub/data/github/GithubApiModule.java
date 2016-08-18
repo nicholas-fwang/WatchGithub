@@ -47,7 +47,7 @@ public class GithubApiModule {
 
     @Provides
     @Singleton
-    public GithubApiManager provideGithubApiManager(GithubApiService githubApiService) {
-        return new GithubApiManager(githubApiService);
+    public GithubUserManager provideGithubApiManager(GithubApiService githubApiService) {
+        return new GithubUserManager(githubApiService);
     }
 }

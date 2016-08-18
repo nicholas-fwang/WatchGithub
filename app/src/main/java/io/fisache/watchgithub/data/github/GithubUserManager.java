@@ -6,10 +6,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class GithubApiManager {
+public class GithubUserManager {
     private GithubApiService githubApiService;
 
-    public GithubApiManager(GithubApiService githubApiService) {
+    public GithubUserManager(GithubApiService githubApiService) {
         this.githubApiService = githubApiService;
     }
 

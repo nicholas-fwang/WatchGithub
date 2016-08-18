@@ -8,6 +8,7 @@ public class RepositoryResponse {
     public String full_name;
     public UserResponse owner;
     public String html_url;
+    public boolean fork;
     public String description;
     public String url;
     public Date created_at;

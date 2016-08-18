@@ -23,6 +23,8 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.userdetail.UserDetailActivity"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.repositorieslist.RepositoriesListActivity"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

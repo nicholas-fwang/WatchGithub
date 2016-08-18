@@ -6,6 +6,10 @@ import android.content.Context;
 import io.fisache.watchgithub.data.GroupComponent;
 import io.fisache.watchgithub.data.GroupModule;
 import io.fisache.watchgithub.data.UserComponent;
+import io.fisache.watchgithub.data.UserModule;
+import io.fisache.watchgithub.data.github.GithubUserManager;
+import io.fisache.watchgithub.data.github.GithubUserModule;
+import io.fisache.watchgithub.data.model.User;
 
 public class BaseApplication extends Application {
 
@@ -22,7 +26,6 @@ public class BaseApplication extends Application {
         super.onCreate();
 
         initAppComponent();
-//        createGroupComponent();
     }
 
     private void initAppComponent() {
@@ -41,8 +44,17 @@ public class BaseApplication extends Application {
         return groupComponent;
     }
 
+    public UserComponent createUserComponent(User user) {
+        userComponent = appComponent.plus(new UserModule(), new GithubUserModule(user));
+        return userComponent;
+    }
+
     public void releaseGroupComponent() {
         groupComponent = null;
+    }
+
+    public void releaseUserComponent() {
+        userComponent = null;
     }
 
     public GroupComponent getGroupComponent() {
@@ -50,4 +62,7 @@ public class BaseApplication extends Application {
     }
 
     // TODO : userComponent
+    public UserComponent getUserComponent() {
+        return userComponent;
+    }
 }

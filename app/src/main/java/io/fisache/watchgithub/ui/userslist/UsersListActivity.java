@@ -29,6 +29,7 @@ import io.fisache.watchgithub.base.AnalyticsManager;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivity;
 import io.fisache.watchgithub.ui.userdetail.UserDetailActivity;
 
 public class UsersListActivity extends BaseActivity {
@@ -140,7 +141,8 @@ public class UsersListActivity extends BaseActivity {
     }
 
     public void onUserItemClicked(User user) {
-        // TODO : Repository View Intent
+        BaseApplication.get(this).createUserComponent(user);
+        RepositoriesListActivity.startWithUser(this);
     }
 
     public void onUserSettingClicked(User user) {

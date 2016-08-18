@@ -7,7 +7,7 @@ import dagger.Module;
 import dagger.Provides;
 import io.fisache.watchgithub.base.Validator;
 import io.fisache.watchgithub.data.UsersManager;
-import io.fisache.watchgithub.data.github.GithubApiManager;
+import io.fisache.watchgithub.data.github.GithubUserManager;
 import io.fisache.watchgithub.scope.ActivityScope;
 
 @Module
@@ -27,9 +27,9 @@ public class UsersListActivityModule {
     @Provides
     @ActivityScope
     UsersListActivityPresenter provideUsersListActivityPresenter(UsersManager usersManager,
-                                                                 GithubApiManager githubApiManager,
+                                                                 GithubUserManager githubUserManager,
                                                                  Validator validator) {
-        return new UsersListActivityPresenter(usersListActivity, usersManager, githubApiManager, validator);
+        return new UsersListActivityPresenter(usersListActivity, usersManager, githubUserManager, validator);
     }
 
     @Provides

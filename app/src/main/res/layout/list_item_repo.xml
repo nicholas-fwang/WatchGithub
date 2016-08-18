@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_marginBottom="@dimen/item_repo_vertical_margin"
-    android:layout_marginTop="@dimen/item_repo_vertical_margin"
-    android:layout_marginRight="@dimen/item_user_horizontal_margin"
-    android:layout_marginLeft="@dimen/item_user_horizontal_margin">
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/item_repo_vertical_margin"
+    android:paddingTop="@dimen/item_repo_vertical_margin"
+    android:paddingRight="@dimen/item_user_horizontal_margin"
+    android:paddingLeft="@dimen/item_user_horizontal_margin"
+    android:background="@drawable/rect_item_repo">
 
     <TextView
         android:id="@+id/tvRepoName"
@@ -20,27 +21,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvRepoName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_marginBottom="@dimen/item_repo_vertical_margin"
         android:text="https://github.com/fisache/spring-framework"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tvForked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_below="@id/tvRepoUrl"
-        android:orientation="horizontal">
+        android:text="Forked"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/item_user_horizontal_margin"
-            android:src="@drawable/ic_forked"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="Forked"/>
-
-    </LinearLayout>
 </RelativeLayout>

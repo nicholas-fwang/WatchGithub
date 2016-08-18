@@ -18,10 +18,10 @@ public class Repository implements Parcelable {
     public long id;
     public String name;
     public String url;
+    public String desc;
     public int star_count;
     public int fork_count;
-    public boolean forked;
-    @Nullable  public String origin_url;
+    public boolean fork;
 
     public Repository() {
 
@@ -31,10 +31,10 @@ public class Repository implements Parcelable {
         id = in.readLong();
         name = in.readString();
         url = in.readString();
+        desc = in.readString();
         star_count = in.readInt();
         fork_count = in.readInt();
-        forked = (in.readInt() == 1 ? true : false);
-        origin_url = in.readString();
+        fork = (in.readInt() == 1 ? true : false);
     }
 
     @Override
@@ -47,8 +47,9 @@ public class Repository implements Parcelable {
         dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(url);
+        dest.writeString(desc);
         dest.writeInt(star_count);
         dest.writeInt(fork_count);
-        dest.writeInt((forked ? 1 : 0));
+        dest.writeInt((fork ? 1 : 0));
     }
 }

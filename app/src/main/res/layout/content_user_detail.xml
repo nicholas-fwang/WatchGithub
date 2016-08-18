@@ -32,7 +32,7 @@
             android:layout_marginRight="@dimen/frag_detail_profile_padding"
             android:layout_marginBottom="@dimen/frag_detail_profile_padding"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:text="User ID" />
+            android:text="User" />
 
         <TextView
             android:id="@+id/tvLogin"

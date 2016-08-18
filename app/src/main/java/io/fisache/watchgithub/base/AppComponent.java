@@ -9,6 +9,7 @@ import io.fisache.watchgithub.data.UserComponent;
 import io.fisache.watchgithub.data.UserModule;
 import io.fisache.watchgithub.data.cache.CacheServiceModule;
 import io.fisache.watchgithub.data.github.GithubApiModule;
+import io.fisache.watchgithub.data.github.GithubUserModule;
 
 @Singleton
 @Component(
@@ -23,5 +24,5 @@ public interface AppComponent {
 
     GroupComponent plus(GroupModule groupModule);
 
-    UserComponent plus(UserModule userModule);
+    UserComponent plus(UserModule userModule, GithubUserModule githubUserModule);
 }

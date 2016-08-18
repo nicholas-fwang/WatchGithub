@@ -5,7 +5,7 @@ import java.util.List;
 import io.fisache.watchgithub.base.BasePresenter;
 import io.fisache.watchgithub.base.Validator;
 import io.fisache.watchgithub.data.UsersManager;
-import io.fisache.watchgithub.data.github.GithubApiManager;
+import io.fisache.watchgithub.data.github.GithubUserManager;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
 import rx.Observer;
@@ -18,16 +18,16 @@ import rx.subscriptions.CompositeSubscription;
 public class UsersListActivityPresenter implements BasePresenter {
     private UsersListActivity activity;
     private UsersManager usersManager;
-    private GithubApiManager githubApiManager;
+    private GithubUserManager githubUserManager;
     private Validator validator;
 
     private CompositeSubscription subscription;
 
     public UsersListActivityPresenter(UsersListActivity activity, UsersManager usersManager,
-                                      GithubApiManager githubApiManager, Validator validator) {
+                                      GithubUserManager githubUserManager, Validator validator) {
         this.activity = activity;
         this.usersManager = usersManager;
-        this.githubApiManager = githubApiManager;
+        this.githubUserManager = githubUserManager;
         this.validator = validator;
         subscription = new CompositeSubscription();
     }
@@ -95,7 +95,7 @@ public class UsersListActivityPresenter implements BasePresenter {
     public void enterGithubUser(String username) {
         if(validator.vaildUsername(username)) {
             activity.showLoading(true);
-            githubApiManager.getGithubUser(username).subscribe(new Observer<User>() {
+            githubUserManager.getGithubUser(username).subscribe(new Observer<User>() {
                 @Override
                 public void onCompleted() {
                     activity.showLoading(false);
