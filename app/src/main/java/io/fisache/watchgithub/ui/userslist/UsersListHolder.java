@@ -2,6 +2,7 @@ package io.fisache.watchgithub.ui.userslist;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,8 +35,10 @@ public class UsersListHolder extends RecyclerView.ViewHolder {
 
     public void bind(User user) {
         tvLogin.setText(user.login);
-        tvDesc.setText(user.desc);
-        if(tvType.equals("User")) {
+        if(user.desc != null) {
+            tvDesc.setText(user.desc);
+        }
+        if(user.type.equals("User")) {
             tvType.setText("[USR]");
         } else {
             tvType.setText("[ORG]");

@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data;
+package io.fisache.watchgithub.data.github;
 
 import dagger.Subcomponent;
 import io.fisache.watchgithub.data.github.GithubUserModule;
@@ -9,11 +9,10 @@ import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivityModule
 @UserScope
 @Subcomponent(
         modules = {
-                UserModule.class,
                 GithubUserModule.class
         }
 )
-public interface UserComponent {
-    // TODO : plus, RepositoriesListActivity
+public interface GithubUserComponent {
+    // TODO : plus RepositoriesDetailActivity
     RepositoriesListActivityComponent plus(RepositoriesListActivityModule repositoriesListActivityModule);
 }

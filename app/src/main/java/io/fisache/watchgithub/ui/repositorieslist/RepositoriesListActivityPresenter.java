@@ -3,7 +3,6 @@ package io.fisache.watchgithub.ui.repositorieslist;
 import java.util.List;
 
 import io.fisache.watchgithub.base.BasePresenter;
-import io.fisache.watchgithub.data.RepositoriesManager;
 import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.Repository;
 import rx.Observer;
@@ -12,15 +11,12 @@ import rx.subscriptions.CompositeSubscription;
 public class RepositoriesListActivityPresenter implements BasePresenter {
     private RepositoriesListActivity activity;
     private GithubRepositoriesManager githubRepositoriesManager;
-    private RepositoriesManager repositoriesManager;
     private CompositeSubscription subscription;
 
     public RepositoriesListActivityPresenter(RepositoriesListActivity activity,
-                                             GithubRepositoriesManager githubRepositoriesManager,
-                                             RepositoriesManager repositoriesManager) {
+                                             GithubRepositoriesManager githubRepositoriesManager) {
         this.activity = activity;
         this.githubRepositoriesManager = githubRepositoriesManager;
-        this.repositoriesManager = repositoriesManager;
         subscription = new CompositeSubscription();
     }
 

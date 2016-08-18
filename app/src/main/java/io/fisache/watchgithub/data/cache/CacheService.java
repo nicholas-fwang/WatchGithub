@@ -22,8 +22,8 @@ public class CacheService implements BaseService {
 //        addUser(25612, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/1342004?v=3", "hwang031451@gmail.com", 300,"desire");
     }
 
-    public static void addUser(long id, String login, String name, String avatar_url, String email, int followers, String desc) {
-        User newUser = new User(id, login, name, avatar_url, email, followers, desc);
+    public static void addUser(long id, String login, String name, String avatar_url, String email, int followers, String type,String desc) {
+        User newUser = new User(id, login, name, avatar_url, email, followers, type, desc);
         USER_CACHE_DATA.put(id, newUser);
     }
 

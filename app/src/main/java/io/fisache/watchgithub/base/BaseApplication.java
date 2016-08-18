@@ -5,9 +5,7 @@ import android.content.Context;
 
 import io.fisache.watchgithub.data.GroupComponent;
 import io.fisache.watchgithub.data.GroupModule;
-import io.fisache.watchgithub.data.UserComponent;
-import io.fisache.watchgithub.data.UserModule;
-import io.fisache.watchgithub.data.github.GithubUserManager;
+import io.fisache.watchgithub.data.github.GithubUserComponent;
 import io.fisache.watchgithub.data.github.GithubUserModule;
 import io.fisache.watchgithub.data.model.User;
 
@@ -15,7 +13,7 @@ public class BaseApplication extends Application {
 
     private AppComponent appComponent;
     private GroupComponent groupComponent;
-    private UserComponent userComponent;
+    private GithubUserComponent githubUserComponent;
 
     public static BaseApplication get(Context context) {
         return (BaseApplication) context.getApplicationContext();
@@ -44,25 +42,25 @@ public class BaseApplication extends Application {
         return groupComponent;
     }
 
-    public UserComponent createUserComponent(User user) {
-        userComponent = appComponent.plus(new UserModule(), new GithubUserModule(user));
-        return userComponent;
+    public GithubUserComponent createGithubUserComponent(User user) {
+        githubUserComponent = appComponent.plus(new GithubUserModule(user));
+        return githubUserComponent;
     }
 
     public void releaseGroupComponent() {
         groupComponent = null;
     }
 
-    public void releaseUserComponent() {
-        userComponent = null;
+    public void releaseGithubUserComponent() {
+        githubUserComponent = null;
     }
 
     public GroupComponent getGroupComponent() {
         return groupComponent;
     }
 
-    // TODO : userComponent
-    public UserComponent getUserComponent() {
-        return userComponent;
+    // TODO : GithubUserComponent
+    public GithubUserComponent getGithubUserComponent() {
+        return githubUserComponent;
     }
 }

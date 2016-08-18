@@ -141,7 +141,7 @@ public class UsersListActivity extends BaseActivity {
     }
 
     public void onUserItemClicked(User user) {
-        BaseApplication.get(this).createUserComponent(user);
+        BaseApplication.get(this).createGithubUserComponent(user);
         RepositoriesListActivity.startWithUser(this);
     }
 

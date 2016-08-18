@@ -17,7 +17,7 @@
 
     <RelativeLayout
         android:id="@+id/llInfo"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/item_user_horizontal_margin"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvLogin"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:text="me"/>
+            android:hint="Go to Setting.."/>
 
     </RelativeLayout>
 

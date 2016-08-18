@@ -20,7 +20,6 @@ import io.fisache.watchgithub.base.AnalyticsManager;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.Repository;
-import io.fisache.watchgithub.data.model.User;
 
 public class RepositoriesListActivity extends BaseActivity {
 
@@ -71,7 +70,7 @@ public class RepositoriesListActivity extends BaseActivity {
     @Override
     protected void setupActivityComponent() {
         BaseApplication.get(this)
-                .getUserComponent().plus(new RepositoriesListActivityModule(this))
+                .getGithubUserComponent().plus(new RepositoriesListActivityModule(this))
                 .inject(this);
     }
 

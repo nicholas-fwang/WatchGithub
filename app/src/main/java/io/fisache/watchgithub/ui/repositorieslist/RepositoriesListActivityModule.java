@@ -4,7 +4,6 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import dagger.Module;
 import dagger.Provides;
-import io.fisache.watchgithub.data.RepositoriesManager;
 import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
 import io.fisache.watchgithub.scope.ActivityScope;
 
@@ -24,9 +23,8 @@ public class RepositoriesListActivityModule {
 
     @Provides
     @ActivityScope
-    RepositoriesListActivityPresenter provideRepositoriesListActivityPresenter(GithubRepositoriesManager githubRepositoriesManager,
-                                                                               RepositoriesManager repositoriesManager) {
-        return new RepositoriesListActivityPresenter(activity, githubRepositoriesManager, repositoriesManager);
+    RepositoriesListActivityPresenter provideRepositoriesListActivityPresenter(GithubRepositoriesManager githubRepositoriesManager) {
+        return new RepositoriesListActivityPresenter(activity, githubRepositoriesManager);
     }
 
     @Provides
