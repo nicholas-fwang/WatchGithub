@@ -1,5 +1,6 @@
 package io.fisache.watchgithub.ui.repositorieslist;
 
+import android.content.res.Resources;
 import android.support.annotation.BoolRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -26,10 +27,13 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private RepositoriesListActivity repositoriesListActivity;
 
+    private Resources resources;
+
     private List<Repository> repositories = new ArrayList<>();
 
     public RepositoriesListAdapter(RepositoriesListActivity repositoriesListActivity) {
         this.repositoriesListActivity = repositoriesListActivity;
+        resources = repositoriesListActivity.getResources();
     }
 
     @Override
@@ -39,10 +43,10 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         switch (viewType) {
             case POPULAR :
-                itemView.setBackgroundColor(repositoriesListActivity.getResources().getColor(R.color.colorOrange));
+                itemView.setBackgroundColor(resources.getColor(R.color.colorOrange));
                 break;
             case RECENTLY :
-                itemView.setBackgroundColor(repositoriesListActivity.getResources().getColor(R.color.colorGreen));
+                itemView.setBackgroundColor(resources.getColor(R.color.colorGreen));
 
         }
         return new RepositoriesListHolder(itemView);
@@ -51,11 +55,9 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public int getItemViewType(int position) {
 
-        Date pushed = DateUtils.convertStringToDate(repositories.get(position).pushed_at);
-        if(DateUtils.differInDate(pushed, DateUtils.getCurrentDate()) <= 3) {
+        if(DateUtils.getTermsFromLastPushed(repositories.get(position).pushed_at) <= resources.getInteger(R.integer.repo_recent_push_terms)) {
             return RECENTLY;
-        } else if(repositories.get(position).star_count > 500) {
-//        if(repositories.get(position).star_count > 500) {
+        } else if(repositories.get(position).star_count > resources.getInteger(R.integer.repo_popular_star)) {
             return POPULAR;
         } else {
             return NORMAL;

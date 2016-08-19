@@ -20,7 +20,7 @@ public class GithubRepositoriesManager {
     }
 
     public Observable<List<Repository>> getUserRepositories() {
-        return githubApiService.getGithubRepositories(user.login)
+        return githubApiService.getGithubRepositories(user.login, 1)
                 .map(new Func1<List<RepositoryResponse>, List<Repository>>() {
                     @Override
                     public List<Repository> call(List<RepositoryResponse> repositoryResponses) {

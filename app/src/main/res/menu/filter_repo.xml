@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/filterRepoAll"
+        android:title="ALL"/>
+    <item
+        android:id="@+id/filterRepoPop"
+        android:title="POPULAR"/>
+    <item
+        android:id="@+id/filterRepoOri"
+        android:title="ORIGIN"/>
+    <item
+        android:id="@+id/filterRepoFork"
+        android:title="FORKED"/>
+    <item
+        android:id="@+id/filterRepoRec"
+        android:title="RECENTLY PUSHED"/>
+</menu>

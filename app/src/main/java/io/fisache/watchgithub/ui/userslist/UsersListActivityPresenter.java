@@ -1,7 +1,10 @@
 package io.fisache.watchgithub.ui.userslist;
 
+import android.content.res.Resources;
+
 import java.util.List;
 
+import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BasePresenter;
 import io.fisache.watchgithub.base.Validator;
 import io.fisache.watchgithub.data.UsersManager;
@@ -21,6 +24,8 @@ public class UsersListActivityPresenter implements BasePresenter {
     private GithubUserManager githubUserManager;
     private Validator validator;
 
+    private Resources resources;
+
     private CompositeSubscription subscription;
 
     private UserFilterType userFilterType = UserFilterType.ALL;
@@ -32,6 +37,7 @@ public class UsersListActivityPresenter implements BasePresenter {
         this.githubUserManager = githubUserManager;
         this.validator = validator;
         subscription = new CompositeSubscription();
+        resources = activity.getResources();
     }
 
     @Override
@@ -62,7 +68,7 @@ public class UsersListActivityPresenter implements BasePresenter {
                     public Boolean call(User user) {
                         switch (userFilterType) {
                             case POPULAR:
-                                return user.followers >= 150 ? true : false;
+                                return user.followers >= resources.getInteger(R.integer.user_popular_follower) ? true : false;
                             case USER:
                                 return user.type.equals("User");
                             case ORG:

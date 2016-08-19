@@ -71,7 +71,6 @@ public class UsersListActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         //set up toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
         ab.setTitle("Saved Github User");

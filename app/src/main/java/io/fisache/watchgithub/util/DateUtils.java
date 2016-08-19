@@ -28,4 +28,10 @@ public class DateUtils {
         return (to.getTime() - from.getTime()) / MILLISECONDS_IN_DAY;
     }
 
+    public static long getTermsFromLastPushed(String pushed_at) {
+        Date from = convertStringToDate(pushed_at);
+        Date to = getCurrentDate();
+        return differInDate(from, to);
+    }
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface GithubApiService {
@@ -14,6 +15,6 @@ public interface GithubApiService {
 
     @GET("/users/{username}/repos")
     Observable<List<RepositoryResponse>> getGithubRepositories(
-            @Path("username") String username
+            @Path("username") String username, @Query("page") int page
     );
 }

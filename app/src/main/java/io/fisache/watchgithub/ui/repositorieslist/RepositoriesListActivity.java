@@ -4,8 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -31,6 +37,8 @@ public class RepositoriesListActivity extends BaseActivity {
     RecyclerView rvRepoList;
     @Bind(R.id.pbLoading)
     ProgressBar pbLoading;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Inject
     RepositoriesListActivityPresenter presenter;
@@ -51,6 +59,11 @@ public class RepositoriesListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repo_list);
         ButterKnife.bind(this);
+
+        //set up toolbar
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setTitle("Repository");
 
         analyticsManager.logScreenView(getClass().getName());
     }
@@ -98,4 +111,48 @@ public class RepositoriesListActivity extends BaseActivity {
         pbLoading.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_repo_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itRepoFilter :
+                popUpUserMenuFilter();
+        }
+        return true;
+    }
+
+    private void popUpUserMenuFilter() {
+        PopupMenu popup = new PopupMenu(this, this.findViewById(R.id.itRepoFilter));
+        popup.getMenuInflater().inflate(R.menu.filter_repo, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.filterRepoAll:
+                        presenter.setFilter(RepoFilterType.ALL);
+                        break;
+                    case R.id.filterRepoPop:
+                        presenter.setFilter(RepoFilterType.POPULAR);
+                        break;
+                    case R.id.filterRepoOri:
+                        presenter.setFilter(RepoFilterType.ORIGIN);
+                        break;
+                    case R.id.filterRepoFork:
+                        presenter.setFilter(RepoFilterType.FORKED);
+                        break;
+                    case R.id.filterRepoRec:
+                        presenter.setFilter(RepoFilterType.RECENTLY);
+                }
+                presenter.setRepositories();
+                return true;
+            }
+        });
+        popup.show();
+    }
 }
