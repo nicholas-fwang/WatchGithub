@@ -9,17 +9,20 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.ui.userslist.UsersListHolder;
+import io.fisache.watchgithub.util.DateUtils;
 
 public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private final int NORMAL = 0;
     private final int POPULAR = 1;
+    private final int RECENTLY = 2;
 
     private RepositoriesListActivity repositoriesListActivity;
 
@@ -33,15 +36,26 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_repo, parent, false);
-        if(viewType == POPULAR) {
-            itemView.setBackgroundColor(repositoriesListActivity.getResources().getColor(R.color.colorOrange));
+
+        switch (viewType) {
+            case POPULAR :
+                itemView.setBackgroundColor(repositoriesListActivity.getResources().getColor(R.color.colorOrange));
+                break;
+            case RECENTLY :
+                itemView.setBackgroundColor(repositoriesListActivity.getResources().getColor(R.color.colorGreen));
+
         }
         return new RepositoriesListHolder(itemView);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(repositories.get(position).star_count > 500) {
+
+        Date pushed = DateUtils.convertStringToDate(repositories.get(position).pushed_at);
+        if(DateUtils.differInDate(pushed, DateUtils.getCurrentDate()) <= 3) {
+            return RECENTLY;
+        } else if(repositories.get(position).star_count > 500) {
+//        if(repositories.get(position).star_count > 500) {
             return POPULAR;
         } else {
             return NORMAL;

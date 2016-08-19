@@ -2,7 +2,6 @@ package io.fisache.watchgithub.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
 
 public class Repository implements Parcelable {
     public static final Parcelable.Creator<Repository> CREATOR = new Parcelable.Creator<Repository>() {
@@ -22,6 +21,7 @@ public class Repository implements Parcelable {
     public int star_count;
     public int fork_count;
     public boolean fork;
+    public String pushed_at;
 
     public Repository() {
 
@@ -35,6 +35,7 @@ public class Repository implements Parcelable {
         star_count = in.readInt();
         fork_count = in.readInt();
         fork = (in.readInt() == 1 ? true : false);
+        pushed_at = in.readString();
     }
 
     @Override
@@ -51,5 +52,6 @@ public class Repository implements Parcelable {
         dest.writeInt(star_count);
         dest.writeInt(fork_count);
         dest.writeInt((fork ? 1 : 0));
+        dest.writeString(pushed_at);
     }
 }

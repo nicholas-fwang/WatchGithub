@@ -13,7 +13,7 @@ public class RepositoryResponse {
     public String url;
     public Date created_at;
     public Date updated_at;
-    public Date pushed_at;
+    public String pushed_at;
     public String git_url;
     public String ssh_url;
     public String clone_url;
