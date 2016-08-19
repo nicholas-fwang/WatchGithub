@@ -1,7 +1,6 @@
 package io.fisache.watchgithub.ui.repositorieslist;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import java.util.List;
 
@@ -55,8 +54,6 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
     }
 
     private void setRepositories() {
-
-        Log.e("fisache", dataMore + "");
         if(!dataMore) {
             return ;
         }

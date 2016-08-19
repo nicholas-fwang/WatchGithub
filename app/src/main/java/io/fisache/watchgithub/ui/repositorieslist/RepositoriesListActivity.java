@@ -29,8 +29,12 @@ import io.fisache.watchgithub.base.AnalyticsManager;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.Repository;
+import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.ui.repositorydetail.RepositoryDetailActivity;
 
 public class RepositoriesListActivity extends BaseActivity {
+
+    private static final String ARG_USER = "arg_user";
 
     @Bind(R.id.llRepoNotExist)
     View llRepoNotExist;
@@ -54,13 +58,17 @@ public class RepositoriesListActivity extends BaseActivity {
     @Inject
     OnRepoScrollListener onRepoScrollListener;
 
-    public static void startWithUser(Activity startingActivity) {
+    private User user;
+
+    public static void startWithUser(User user, Activity startingActivity) {
         Intent intent = new Intent(startingActivity, RepositoriesListActivity.class);
+        intent.putExtra(ARG_USER, user);
         startingActivity.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        user = getIntent().getParcelableExtra(ARG_USER);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repo_list);
         ButterKnife.bind(this);
@@ -68,7 +76,9 @@ public class RepositoriesListActivity extends BaseActivity {
         //set up toolbar
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setTitle("Repository");
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowHomeEnabled(true);
+        ab.setTitle(user.login);
 
         analyticsManager.logScreenView(getClass().getName());
     }
@@ -129,6 +139,9 @@ public class RepositoriesListActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.itRepoFilter :
                 popUpUserMenuFilter();
+                break;
+            case android.R.id.home :
+                onBackPressed();
         }
         return true;
     }
@@ -164,6 +177,10 @@ public class RepositoriesListActivity extends BaseActivity {
 
     public void showNotMoreData() {
         Snackbar.make(findViewById(android.R.id.content), "User doesn't have more repositories", Snackbar.LENGTH_LONG).show();
+    }
+
+    public void onRepoItemClicked(Repository repository) {
+        RepositoryDetailActivity.startWithRepo(repository, this);
     }
 
     @Override

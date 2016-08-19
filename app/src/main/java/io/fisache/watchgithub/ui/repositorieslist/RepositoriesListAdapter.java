@@ -49,7 +49,7 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
                 break;
             case RECENTLY :
                 itemView.setBackgroundColor(resources.getColor(R.color.colorGreen));
-
+                break;
         }
         return new RepositoriesListHolder(itemView);
     }
@@ -67,8 +67,18 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((RepositoriesListHolder)holder).bind(repositories.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClicked(position);
+            }
+        });
+    }
+
+    private void onItemClicked(int position) {
+        repositoriesListActivity.onRepoItemClicked(repositories.get(position));
     }
 
     public void updateRepositoriesList(List<Repository> repositories, boolean firstData, boolean filter) {

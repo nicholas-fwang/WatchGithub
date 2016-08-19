@@ -5,6 +5,8 @@ import io.fisache.watchgithub.data.github.GithubUserModule;
 import io.fisache.watchgithub.scope.UserScope;
 import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivityComponent;
 import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivityModule;
+import io.fisache.watchgithub.ui.repositorydetail.RepositoryDetailActivityModule;
+import io.fisache.watchgithub.ui.repositorydetail.RepositoryDetailComponent;
 
 @UserScope
 @Subcomponent(
@@ -13,6 +15,7 @@ import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivityModule
         }
 )
 public interface GithubUserComponent {
-    // TODO : plus RepositoriesDetailActivity
     RepositoriesListActivityComponent plus(RepositoriesListActivityModule repositoriesListActivityModule);
+
+    RepositoryDetailComponent plus(RepositoryDetailActivityModule repositoryDetailActivityModule);
 }

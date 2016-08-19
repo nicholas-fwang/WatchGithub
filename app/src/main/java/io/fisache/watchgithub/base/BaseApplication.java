@@ -59,7 +59,6 @@ public class BaseApplication extends Application {
         return groupComponent;
     }
 
-    // TODO : GithubUserComponent
     public GithubUserComponent getGithubUserComponent() {
         return githubUserComponent;
     }
