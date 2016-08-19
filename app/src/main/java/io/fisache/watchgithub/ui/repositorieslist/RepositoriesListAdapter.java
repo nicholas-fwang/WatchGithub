@@ -29,7 +29,9 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private Resources resources;
 
+    private boolean dirty = false;
     private List<Repository> repositories = new ArrayList<>();
+    private List<Repository> originRepositories = new ArrayList<>();
 
     public RepositoriesListAdapter(RepositoriesListActivity repositoriesListActivity) {
         this.repositoriesListActivity = repositoriesListActivity;
@@ -69,10 +71,29 @@ public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.V
         ((RepositoriesListHolder)holder).bind(repositories.get(position));
     }
 
-    public void updateRepositoriesList(List<Repository> repositories) {
-        this.repositories.clear();
-        this.repositories.addAll(repositories);
+    public void updateRepositoriesList(List<Repository> repositories, boolean firstData, boolean filter) {
+        if(firstData) {
+            this.repositories.clear();
+            this.originRepositories.clear();
+            this.originRepositories.addAll(repositories);
+            this.repositories.addAll(repositories);
+        } else if(filter) {
+            dirty = true;
+            this.repositories.clear();
+            this.repositories.addAll(repositories);
+        } else {
+            if(dirty) {
+                this.repositories.clear();
+                this.repositories.addAll(originRepositories);
+                dirty = false;
+            } else {
+                this.originRepositories.addAll(repositories);
+                this.repositories.addAll(repositories);
+            }
+        }
+
         notifyDataSetChanged();
+        OnRepoScrollListener.repoScrollLoading = true;
     }
 
     @Override

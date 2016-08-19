@@ -1,6 +1,7 @@
 package io.fisache.watchgithub.ui.repositorieslist;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.util.List;
 
@@ -24,6 +25,12 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
 
     private RepoFilterType repoFilterType = RepoFilterType.ALL;
 
+    public static int REPOSPAGE = 1;
+
+    private boolean dataMore = true;
+
+    private boolean cached = false;
+
     public RepositoriesListActivityPresenter(RepositoriesListActivity activity,
                                              GithubRepositoriesManager githubRepositoriesManager) {
         this.activity = activity;
@@ -37,15 +44,23 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
         if(subscription == null) {
             subscription = new CompositeSubscription();
         }
+        REPOSPAGE  = 1;
         setRepositories();
     }
 
     @Override
     public void unsubscribe() {
         subscription = null;
+        REPOSPAGE = 1;
     }
 
-    void setRepositories() {
+    private void setRepositories() {
+
+        Log.e("fisache", dataMore + "");
+        if(!dataMore) {
+            return ;
+        }
+
         activity.showLoading(true);
         subscription.clear();
         Subscription mSubscription = githubRepositoriesManager.getUserRepositories()
@@ -53,24 +68,6 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
                     @Override
                     public Observable<Repository> call(List<Repository> repositories) {
                         return Observable.from(repositories);
-                    }
-                })
-                .filter(new Func1<Repository, Boolean>() {
-                    @Override
-                    public Boolean call(Repository repository) {
-                        switch (repoFilterType) {
-                            case POPULAR:
-                                return repository.star_count > resources.getInteger(R.integer.repo_popular_star) ? true : false;
-                            case ORIGIN:
-                                return !repository.fork;
-                            case FORKED:
-                                return repository.fork;
-                            case RECENTLY:
-                                return DateUtils.getTermsFromLastPushed(repository.pushed_at) <= resources.getInteger(R.integer.repo_recent_push_terms) ? true : false;
-                            case ALL:
-                            default:
-                                return true;
-                        }
                     }
                 })
                 .toList()
@@ -94,15 +91,92 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
     }
 
     private void processRepositories(List<Repository> repositories) {
-        if(repositories.isEmpty()) {
+
+        // first data empty
+        if(repositories.isEmpty() && OnRepoScrollListener.repoScrollLoading) {
             activity.showNotExistRepositories();
-        } else {
-            activity.showExistRepositories();
-            activity.setRepositories(repositories);
+            return ;
         }
+
+        // first data exist
+        if(!repositories.isEmpty() && OnRepoScrollListener.repoScrollLoading) {
+            activity.showExistRepositories();
+            activity.setRepositories(repositories, true, false);
+            return ;
+        }
+
+        // scroll
+
+        // next data empty
+        if(repositories.isEmpty()) {
+            // next data not exist, so not setRepsitories call
+            dataMore = false;
+            activity.showNotMoreData();
+        } else {
+            dataMore = true;
+            activity.setRepositories(repositories, false, false);
+        }
+        OnRepoScrollListener.repoScrollLoading = true;
     }
 
     public void setFilter(RepoFilterType type) {
         repoFilterType = type;
+    }
+
+    public void setNextRepositories() {
+        REPOSPAGE++;
+        setRepositories();
+    }
+
+    void setCacheRepositories() {
+        cached = true;
+        activity.showLoading(true);
+        githubRepositoriesManager.getCacheUserRepositories()
+                .flatMap(new Func1<List<Repository>, Observable<Repository>>() {
+                    @Override
+                    public Observable<Repository> call(List<Repository> repositories) {
+                        return Observable.from(repositories);
+                    }
+                })
+                .filter(new Func1<Repository, Boolean>() {
+                    @Override
+                    public Boolean call(Repository repository) {
+                        switch (repoFilterType) {
+                            case POPULAR:
+                                return repository.star_count > resources.getInteger(R.integer.repo_popular_star) ? true : false;
+                            case ORIGIN:
+                                return !repository.fork;
+                            case FORKED:
+                                return repository.fork;
+                            case RECENTLY:
+                                return DateUtils.getTermsFromLastPushed(repository.pushed_at) <= resources.getInteger(R.integer.repo_recent_push_terms) ? true : false;
+                            case ALL:
+                                cached = false;
+                            default:
+                                return true;
+                        }
+                    }
+                })
+                .toList()
+                .subscribe(new Observer<List<Repository>>() {
+                    @Override
+                    public void onCompleted() {
+                        activity.showLoading(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        activity.showLoading(false);
+                    }
+
+                    @Override
+                    public void onNext(List<Repository> repositories) {
+                        activity.setRepositories(repositories, false, cached);
+                    }
+                });
+    }
+
+    public boolean isCached() {
+        return cached;
     }
 }

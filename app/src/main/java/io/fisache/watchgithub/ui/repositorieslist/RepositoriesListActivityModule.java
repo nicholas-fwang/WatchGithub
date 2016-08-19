@@ -38,4 +38,10 @@ public class RepositoriesListActivityModule {
     LinearLayoutManager provideLinearLayoutManager() {
         return new LinearLayoutManager(activity);
     }
+
+    @Provides
+    @ActivityScope
+    OnRepoScrollListener provideOnRepoScrollListener(LinearLayoutManager linearLayoutManager, RepositoriesListActivityPresenter presenter) {
+        return new OnRepoScrollListener(linearLayoutManager, presenter);
+    }
 }

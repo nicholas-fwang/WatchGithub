@@ -4,16 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -48,6 +51,8 @@ public class RepositoriesListActivity extends BaseActivity {
     LinearLayoutManager linearLayoutManager;
     @Inject
     AnalyticsManager analyticsManager;
+    @Inject
+    OnRepoScrollListener onRepoScrollListener;
 
     public static void startWithUser(Activity startingActivity) {
         Intent intent = new Intent(startingActivity, RepositoriesListActivity.class);
@@ -101,10 +106,11 @@ public class RepositoriesListActivity extends BaseActivity {
     public void showRepositoriesListView() {
         rvRepoList.setAdapter(repositoriesListAdapter);
         rvRepoList.setLayoutManager(linearLayoutManager);
+        rvRepoList.addOnScrollListener(onRepoScrollListener);
     }
 
-    public void setRepositories(List<Repository> repositories) {
-        repositoriesListAdapter.updateRepositoriesList(repositories);
+    public void setRepositories(List<Repository> repositories, boolean firstData, boolean filter) {
+        repositoriesListAdapter.updateRepositoriesList(repositories, firstData, filter);
     }
 
     public void showLoading(boolean loading) {
@@ -149,10 +155,20 @@ public class RepositoriesListActivity extends BaseActivity {
                     case R.id.filterRepoRec:
                         presenter.setFilter(RepoFilterType.RECENTLY);
                 }
-                presenter.setRepositories();
+                presenter.setCacheRepositories();
                 return true;
             }
         });
         popup.show();
+    }
+
+    public void showNotMoreData() {
+        Snackbar.make(findViewById(android.R.id.content), "User doesn't have more repositories", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        BaseApplication.get(this).releaseGithubUserComponent();
     }
 }
