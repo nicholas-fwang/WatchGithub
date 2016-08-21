@@ -81,6 +81,8 @@ ext {
     final RUNNER_VERSION = '0.4.1'
 
     espresso = "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"
+    espressoContrib = "com.android.support.test.espresso:espresso-contrib:${ESPRESSO_VERSION}"
+    espressoidle = "com.android.support.test.espresso:espresso-idling-resource:${ESPRESSO_VERSION}"
     testRunner = "com.android.support.test:runner:$RUNNER_VERSION"
     testRule = "com.android.support.test:rules:$RUNNER_VERSION"
 

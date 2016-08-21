@@ -56,6 +56,7 @@ public class UsersListActivityPresenter implements BasePresenter {
     public void setUsers() {
         activity.showLoading(true);
         subscription.clear();
+
         Subscription mSubscription = usersManager.getUsers()
                 .flatMap(new Func1<List<User>, Observable<User>>() {
                     @Override

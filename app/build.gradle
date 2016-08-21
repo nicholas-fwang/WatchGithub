@@ -69,6 +69,8 @@ dependencies {
     compile rootProject.ext.butterKnife
     compile rootProject.ext.rxbinding
 
+    compile rootProject.ext.espressoidle
+
     // Data dependencies
     compile rootProject.ext.sqlbrite
     compile rootProject.ext.picasso
@@ -85,6 +87,11 @@ dependencies {
     androidTestCompile rootProject.ext.testRunner
     androidTestCompile rootProject.ext.testRule
     androidTestCompile rootProject.ext.espresso
+    androidTestCompile(rootProject.ext.espressoContrib) {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
     androidTestCompile rootProject.ext.mockito
     androidTestCompile "com.google.dexmaker:dexmaker:1.2"
     androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
