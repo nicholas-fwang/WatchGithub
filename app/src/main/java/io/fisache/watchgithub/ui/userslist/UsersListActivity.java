@@ -162,8 +162,9 @@ public class UsersListActivity extends BaseActivity {
         addAlertDialog.setMessage("Be sure to enter");
 
         final EditText etLogin = new EditText(this);
+        etLogin.setId(R.id.etGithubId);
         addAlertDialog.setView(etLogin);
-
+        
         addAlertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 presenter.enterGithubUser(etLogin.getText().toString());

@@ -11,14 +11,38 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner 'io.fisache.watchgithub.mock.MyTestRunner'
+
     }
+
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+
+        }
+    }
+
+    android.variantFilter { variant ->
+        if (variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res/menu']
+        }
+    }
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor' // butterknife
@@ -54,16 +78,16 @@ dependencies {
 
     // Test dependencies
     testCompile rootProject.ext.junit
-    testCompile rootProject.ext.assertjCore
-    testCompile rootProject.ext.robolectric
-    testCompile rootProject.ext.roboShadow
-    testCompile rootProject.ext.mockito
 
     // Android Test dependencies
+    androidTestCompile rootProject.ext.junit
     androidTestCompile rootProject.ext.supportAnnotations
-    androidTestCompile rootProject.ext.supportTestRunner
-    androidTestCompile rootProject.ext.androidTestRule
+    androidTestCompile rootProject.ext.testRunner
+    androidTestCompile rootProject.ext.testRule
     androidTestCompile rootProject.ext.espresso
+    androidTestCompile rootProject.ext.mockito
+    androidTestCompile "com.google.dexmaker:dexmaker:1.2"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
 
     // In-repo dependencies
     // compile project(':projectName')

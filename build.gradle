@@ -28,12 +28,9 @@ ext {
     compileSdkVersion = 23
     buildToolsVersion = '23.0.1'
 
-    final RUNNER_VERSION = '0.4.1'
     final BUILD_VERSION = '23.0.1'
 
     // Android dependencies
-    supportTestRunner = "com.android.support.test:runner:$RUNNER_VERSION"
-    androidTestRule = "com.android.support.test:rules:$RUNNER_VERSION"
     supportV4 = "com.android.support:support-v4:$BUILD_VERSION"
     supportV7 = "com.android.support:appcompat-v7:$BUILD_VERSION"
     supportAnnotations = "com.android.support:support-annotations:$BUILD_VERSION"
@@ -70,20 +67,26 @@ ext {
     adapterrx = "com.squareup.retrofit2:adapter-rxjava:${RETROFIT_VERSION}"
     gson = "com.squareup.retrofit2:converter-gson:${RETROFIT_VERSION}"
 
-    // Test dependencies
+    // Common Test dependencies
+    final MOCKITO_VERSION = '1.10.19'
     final TIMBER_VERSION = '4.1.2'
-    final ROBOLECTRIC_VERSION = '3.0'
     final JUNIT_VERSION = '4.12'
-    final ESPRESSO_VERSION = '2.2.1'
-    final ASSERTJCORE_VERSION = '1.7.0'
-    final MOCKITO_VERSION = '2.0.57-beta'
 
-    junit = "junit:junit:${JUNIT_VERSION}"
-    robolectric = "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
-    // test for fragment
-    roboShadow = "org.robolectric:shadows-support-v4:${ROBOLECTRIC_VERSION}"
-    assertjCore = "org.assertj:assertj-core:${ASSERTJCORE_VERSION}"
-    timber = "com.jakewharton.timber:timber:${TIMBER_VERSION}"
-    espresso = "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"
     mockito = "org.mockito:mockito-core:${MOCKITO_VERSION}"
+    timber = "com.jakewharton.timber:timber:${TIMBER_VERSION}"
+    junit = "junit:junit:${JUNIT_VERSION}"
+
+    // Android Test dependencies
+    final ESPRESSO_VERSION = '2.2.1'
+    final RUNNER_VERSION = '0.4.1'
+
+    espresso = "com.android.support.test.espresso:espresso-core:${ESPRESSO_VERSION}"
+    testRunner = "com.android.support.test:runner:$RUNNER_VERSION"
+    testRule = "com.android.support.test:rules:$RUNNER_VERSION"
+
+    // Test dependencies
+    final ROBOLECTRIC_VERSION = '3.0'
+
+    robolectric = "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+
 }
