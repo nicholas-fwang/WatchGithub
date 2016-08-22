@@ -32,7 +32,7 @@ public class UserDetailActivityPresenter implements BasePresenter {
 
     public void updateUser() {
         user.desc = userDesc;
-        usersManager.saveUser(user);
+        usersManager.updateDesc(user);
         activity.finish();
     }
 

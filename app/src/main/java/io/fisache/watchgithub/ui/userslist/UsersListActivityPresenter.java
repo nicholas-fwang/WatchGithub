@@ -1,6 +1,7 @@
 package io.fisache.watchgithub.ui.userslist;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;

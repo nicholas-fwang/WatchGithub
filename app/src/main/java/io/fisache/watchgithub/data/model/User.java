@@ -2,6 +2,7 @@ package io.fisache.watchgithub.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class User implements Parcelable {
@@ -14,7 +15,7 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
-    public long id;
+    @NonNull public long id;
     public String login;
     public String name;
     public String avatar_url;
@@ -25,7 +26,7 @@ public class User implements Parcelable {
 
     public User(){}
 
-    public User(long id, String login, String name, String avatar_url, String email, int followers, String type, String desc) {
+    public User(@NonNull long id, String login, String name, String avatar_url, String email, int followers, String type, String desc) {
         this.id = id;
         this.login = login;
         this.name = name;

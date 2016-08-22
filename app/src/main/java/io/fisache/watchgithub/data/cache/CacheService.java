@@ -54,6 +54,11 @@ public class CacheService implements BaseService {
     }
 
     @Override
+    public void updateDesc(User user) {
+        USER_CACHE_DATA.put(user.id, user);
+    }
+
+    @Override
     public void deleteAllUser() {
         USER_CACHE_DATA.clear();
     }

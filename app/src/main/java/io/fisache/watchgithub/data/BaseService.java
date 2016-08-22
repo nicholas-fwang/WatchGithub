@@ -12,6 +12,8 @@ public interface BaseService {
 
     void saveUser(User user);
 
+    void updateDesc(User user);
+
     void deleteAllUser();
 
     void deleteUser(long userId);
