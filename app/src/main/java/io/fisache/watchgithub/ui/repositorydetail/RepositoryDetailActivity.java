@@ -2,6 +2,7 @@ package io.fisache.watchgithub.ui.repositorydetail;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
@@ -112,4 +114,12 @@ public class RepositoryDetailActivity extends BaseActivity {
         }
         tvForkStar.setText(TextUtils.getForkStarString(repository.fork_count, repository.star_count));
     }
+
+    @OnClick(R.id.btnGithub)
+    public void onClickVisitGithub() {
+        Uri uri = Uri.parse(repository.html_url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
 }

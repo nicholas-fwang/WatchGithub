@@ -64,7 +64,6 @@ public class UsersManager implements BaseService{
 //        return cacheUsers;
         /**
          * sqlbrite
-         * will add realm in concat
          */
         Observable<List<User>> localUsers = sqlbriteService.getUsers();
         return Observable.concat(localUsers, localUsers).first();

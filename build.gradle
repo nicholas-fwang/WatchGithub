@@ -90,5 +90,4 @@ ext {
     final ROBOLECTRIC_VERSION = '3.0'
 
     robolectric = "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
-
 }

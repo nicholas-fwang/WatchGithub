@@ -57,6 +57,7 @@ dependencies {
     compile rootProject.ext.supportV7
     compile rootProject.ext.supportDesign
     compile rootProject.ext.supportRecycler
+    compile rootProject.ext.supportAnnotations
 
     apt rootProject.ext.daggerCompiler
     provided rootProject.ext.javax
@@ -80,6 +81,7 @@ dependencies {
 
     // Test dependencies
     testCompile rootProject.ext.junit
+    testCompile rootProject.ext.supportAnnotations
 
     // Android Test dependencies
     androidTestCompile rootProject.ext.junit
