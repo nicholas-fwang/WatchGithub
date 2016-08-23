@@ -1,6 +1,5 @@
 package io.fisache.watchgithub.ui.userslist;
 
-import dagger.Component;
 import dagger.Subcomponent;
 import io.fisache.watchgithub.scope.ActivityScope;
 

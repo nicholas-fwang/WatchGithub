@@ -4,7 +4,7 @@ import android.support.v7.app.AlertDialog;
 
 import dagger.Module;
 import dagger.Provides;
-import io.fisache.watchgithub.data.UsersManager;
+import io.fisache.watchgithub.data.local.UsersManager;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.scope.ActivityScope;
 

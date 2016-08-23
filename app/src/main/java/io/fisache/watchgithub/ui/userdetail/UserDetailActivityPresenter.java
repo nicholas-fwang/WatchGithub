@@ -1,7 +1,7 @@
 package io.fisache.watchgithub.ui.userdetail;
 
 import io.fisache.watchgithub.base.BasePresenter;
-import io.fisache.watchgithub.data.UsersManager;
+import io.fisache.watchgithub.data.local.UsersManager;
 import io.fisache.watchgithub.data.model.User;
 
 public class UserDetailActivityPresenter implements BasePresenter {

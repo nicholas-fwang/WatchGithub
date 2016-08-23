@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 import io.fisache.watchgithub.R;
-import io.fisache.watchgithub.data.UsersManager;
 import io.fisache.watchgithub.data.github.GithubUserManager;
+import io.fisache.watchgithub.data.local.UsersManager;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.mock.inject.ApplicationMock;
 import io.fisache.watchgithub.mock.inject.GithubApiModuleMock;

@@ -43,8 +43,8 @@ public class GithubUserManager {
         return Observable.from(users)
                 .flatMap(new Func1<User, Observable<User>>() {
                     @Override
-                    public Observable<User> call(User user) {
-                        return githubApiService.getGithubUser(user.login)
+                    public Observable<User> call(final User localUser) {
+                        return githubApiService.getGithubUser(localUser.login)
                                 .map(new Func1<UserResponse, User>() {
                                     @Override
                                     public User call(UserResponse userResponse) {
@@ -56,6 +56,7 @@ public class GithubUserManager {
                                         user.email = userResponse.email;
                                         user.followers = userResponse.followers;
                                         user.type = userResponse.type;
+                                        user.desc = localUser.desc;
                                         return user;
                                     }
                                 });

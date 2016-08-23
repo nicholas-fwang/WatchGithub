@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data;
+package io.fisache.watchgithub.data.local;
 
 import dagger.Subcomponent;
 import io.fisache.watchgithub.scope.GroupScope;

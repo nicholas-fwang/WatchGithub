@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data;
+package io.fisache.watchgithub.data.local;
 
 import android.app.Application;
 import android.database.Cursor;
