@@ -67,6 +67,20 @@ public class SqlbriteService implements BaseService {
     }
 
     @Override
+    public void updateUser(User user) {
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.COLUMN_NAME_NAME, user.name);
+        values.put(UserEntry.COLUMN_NAME_AVATAR_URL, user.avatar_url);
+        values.put(UserEntry.COLUMN_NAME_EMAIL, user.email);
+        values.put(UserEntry.COLUMN_NAME_FOLLOWERS, user.followers);
+        values.put(UserEntry.COLUMN_NAME_TYPE, user.type);
+
+        String selection = UserEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+        String[] selectionArgs = {Long.toString(user.id)};
+        databaseHelper.update(UserEntry.TABLE_NAME, values, selection, selectionArgs);
+    }
+
+    @Override
     public void updateDesc(User user) {
         ContentValues values = new ContentValues();
         values.put(UserEntry.COLUMN_NAME_DESC, user.desc);

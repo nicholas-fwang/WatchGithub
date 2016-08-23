@@ -16,6 +16,7 @@ import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -31,6 +32,8 @@ public class UsersListActivityPresenter implements BasePresenter {
     private CompositeSubscription subscription;
 
     private UserFilterType userFilterType = UserFilterType.ALL;
+
+    private static boolean firstStarted = true;
 
     public UsersListActivityPresenter(UsersListActivity activity, UsersManager usersManager,
                                       GithubUserManager githubUserManager, Validator validator) {
@@ -59,7 +62,67 @@ public class UsersListActivityPresenter implements BasePresenter {
         activity.showLoading(true);
         subscription.clear();
 
-        Subscription mSubscription = usersManager.getUsers()
+        Subscription mSubscription = applyUserFilter(usersManager.getUsers(), false)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<User>>() {
+                    @Override
+                    public void onCompleted() {
+                        activity.showLoading(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        activity.showLoading(false);
+                    }
+
+                    @Override
+                    public void onNext(List<User> users) {
+//                        Log.d("fisache", "local");
+                        processUsers(users);
+                    }
+                });
+        subscription.add(mSubscription);
+    }
+
+    private void processUsers(List<User> users) {
+        if(users.isEmpty()) {
+            activity.showNotExistUsers();
+        } else {
+            if(firstStarted) {
+                activity.showLoading(true);
+                Subscription remoteSubscription =
+                        applyUserFilter(githubUserManager.getGithubUsers(users), true)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<List<User>>() {
+                            @Override
+                            public void onCompleted() {
+                                activity.showLoading(false);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                activity.showLoading(false);
+                            }
+
+                            @Override
+                            public void onNext(List<User> users) {
+//                                Log.d("fisache", "remote");
+                                firstStarted = false;
+                                processUsers(users);
+                            }
+                        });
+                subscription.add(remoteSubscription);
+            } else {
+                activity.setUsers(users);
+                activity.showExistUsers();
+            }
+        }
+    }
+
+    private Observable<List<User>> applyUserFilter(Observable<List<User>> observable, final boolean isRemote) {
+        return observable
                 .flatMap(new Func1<List<User>, Observable<User>>() {
                     @Override
                     public Observable<User> call(List<User> users) {
@@ -82,35 +145,16 @@ public class UsersListActivityPresenter implements BasePresenter {
                         }
                     }
                 })
-                .toList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<User>>() {
+                .doOnNext(new Action1<User>() {
                     @Override
-                    public void onCompleted() {
-                        activity.showLoading(false);
+                    public void call(User user) {
+                        if(isRemote) {
+//                            Log.d("fisache", "user updated : " + user.login);
+                            usersManager.updateUser(user);
+                        }
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        activity.showLoading(false);
-                    }
-
-                    @Override
-                    public void onNext(List<User> users) {
-                        processUsers(users);
-                    }
-                });
-        subscription.add(mSubscription);
-    }
-
-    private void processUsers(List<User> users) {
-        if(users.isEmpty()) {
-            activity.showNotExistUsers();
-        } else {
-            activity.setUsers(users);
-            activity.showExistUsers();
-        }
+                })
+                .toList();
     }
 
     public void enterGithubUser(String username) {
