@@ -127,6 +127,7 @@ public class UsersListActivity extends BaseActivity {
         llRepoExist.setVisibility(View.VISIBLE);
         llRepoNotExist.setVisibility(View.GONE);
         showUsersListView();
+        showLoading(false);
     }
 
     public void showNotExistUsers() {
