@@ -98,7 +98,7 @@ public class RepositoriesListActivity extends BaseActivity {
     @Override
     protected void setupActivityComponent() {
         BaseApplication.get(this)
-                .getGithubUserComponent().plus(new RepositoriesListActivityModule(this))
+                .getGithubUserComponent().plus(new RepositoriesListActivityModule(this, user))
                 .inject(this);
     }
 

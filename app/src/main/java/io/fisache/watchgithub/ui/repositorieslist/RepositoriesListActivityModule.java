@@ -4,15 +4,25 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import dagger.Module;
 import dagger.Provides;
+import io.fisache.watchgithub.data.cache.CacheRepositoriesManager;
 import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
+import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.scope.ActivityScope;
 
 @Module
 public class RepositoriesListActivityModule {
     RepositoriesListActivity activity;
+    User user;
 
-    public RepositoriesListActivityModule(RepositoriesListActivity activity) {
+    public RepositoriesListActivityModule(RepositoriesListActivity activity, User user) {
         this.activity = activity;
+        this.user = user;
+    }
+
+    @Provides
+    @ActivityScope
+    User provideUser() {
+        return user;
     }
 
     @Provides
@@ -23,8 +33,9 @@ public class RepositoriesListActivityModule {
 
     @Provides
     @ActivityScope
-    RepositoriesListActivityPresenter provideRepositoriesListActivityPresenter(GithubRepositoriesManager githubRepositoriesManager) {
-        return new RepositoriesListActivityPresenter(activity, githubRepositoriesManager);
+    RepositoriesListActivityPresenter provideRepositoriesListActivityPresenter(GithubRepositoriesManager githubRepositoriesManager,
+                                                                               CacheRepositoriesManager cacheRepositoriesManager) {
+        return new RepositoriesListActivityPresenter(activity, user, githubRepositoriesManager, cacheRepositoriesManager);
     }
 
     @Provides

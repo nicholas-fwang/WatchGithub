@@ -29,8 +29,8 @@ public class GithubRepositoriesManager {
         REPO_CACHE_DATA.clear();
     }
 
-    public Observable<List<Repository>> getUserRepositories() {
-        return githubApiService.getGithubRepositories(user.login, RepositoriesListActivityPresenter.REPOSPAGE)
+    public Observable<List<Repository>> getUserRepositories(int repoPage) {
+        return githubApiService.getGithubRepositories(user.login, repoPage)
                 .map(new Func1<List<RepositoryResponse>, List<Repository>>() {
                     @Override
                     public List<Repository> call(List<RepositoryResponse> repositoryResponses) {

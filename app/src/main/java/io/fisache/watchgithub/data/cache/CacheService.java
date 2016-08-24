@@ -1,75 +1,63 @@
 package io.fisache.watchgithub.data.cache;
 
 import android.app.Application;
+import android.util.Log;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import io.fisache.watchgithub.data.BaseService;
+import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
+import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
+import rx.functions.Action1;
 
-public class CacheService implements BaseService {
+public class CacheService {
+
     private Application application;
 
-    private static Map<Long, User> USER_CACHE_DATA;
+    protected static Map<String, UserRepoCache> USER_CACHE_DATA;
 
     static {
-        USER_CACHE_DATA = new LinkedHashMap<>();
-//        addUser(25673, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/15536270?v=3", "hwang031451@gmail.com", 1,"Me");
-//        addUser(25670, "pivotal", "inki hwang", "https://avatars.githubusercontent.com/u/9148?v=3", "hwang031451@gmail.com", 150,"desire");
-//        addUser(25612, "fisache", "inki hwang", "https://avatars.githubusercontent.com/u/1342004?v=3", "hwang031451@gmail.com", 300,"desire");
-    }
-
-    public static void addUser(long id, String login, String name, String avatar_url, String email, int followers, String type,String desc) {
-        User newUser = new User(id, login, name, avatar_url, email, followers, type, desc);
-        USER_CACHE_DATA.put(id, newUser);
+        USER_CACHE_DATA = new LruCacheImpl(5, 0.75f);
     }
 
     public CacheService(Application application) {
         this.application = application;
     }
 
-    @Override
-    public Observable<List<User>> getUsers() {
-        return Observable
-                .from(USER_CACHE_DATA.values())
-                .toList();
+    public Observable<List<Repository>> getRepositories(final String login, int repoPage) {
+        // hit
+        UserRepoCache userRepoCache = USER_CACHE_DATA.get(login);
+        if(userRepoCache != null && repoPage <= userRepoCache.getRepoPage()) {
+            Log.d("fisache", "hit");
+            return Observable.from(USER_CACHE_DATA.get(login).getRepositories()).toList();
+        }
+        // miss
+        return Observable.error(new RuntimeException("cache missing"));
     }
 
-    @Override
-    public Observable<User> getUser(long userId) {
-        final User user = USER_CACHE_DATA.get(userId);
-        if(user != null) {
-            return Observable.just(user);
+    public void replaceCache(UserRepoCache userRepoCache) {
+        USER_CACHE_DATA.put(userRepoCache.login, userRepoCache);
+    }
+
+    public void addRepositoriesAndRepoPage(String login, List<Repository> repositories, int repoPage) {
+        USER_CACHE_DATA.get(login).getRepositories().addAll(repositories);
+        setUserRepoPage(login, repoPage);
+
+    }
+
+    public int getCachedRepoPage(String login) {
+        if(USER_CACHE_DATA.get(login) == null) {
+            return 1;
         } else {
-            return Observable.empty();
+            return USER_CACHE_DATA.get(login).getRepoPage();
         }
     }
 
-    @Override
-    public void saveUser(User user) {
-        USER_CACHE_DATA.put(user.id, user);
-    }
-
-    @Override
-    public void updateUser(User user) {
-        USER_CACHE_DATA.put(user.id, user);
-    }
-
-    @Override
-    public void updateDesc(User user) {
-        USER_CACHE_DATA.put(user.id, user);
-    }
-
-    @Override
-    public void deleteAllUser() {
-        USER_CACHE_DATA.clear();
-    }
-
-    @Override
-    public void deleteUser(long userId) {
-        USER_CACHE_DATA.remove(userId);
+    public void setUserRepoPage(String login, int page) {
+        USER_CACHE_DATA.get(login).setRepoPage(page);
     }
 }

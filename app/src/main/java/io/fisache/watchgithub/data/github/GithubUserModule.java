@@ -2,6 +2,8 @@ package io.fisache.watchgithub.data.github;
 
 import dagger.Module;
 import dagger.Provides;
+import io.fisache.watchgithub.data.cache.CacheRepositoriesManager;
+import io.fisache.watchgithub.data.cache.CacheService;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.scope.UserScope;
 
@@ -23,5 +25,11 @@ public class GithubUserModule {
     @UserScope
     GithubRepositoriesManager provideGithubRepositoriesManager(User user, GithubApiService githubApiService) {
         return new GithubRepositoriesManager(user, githubApiService);
+    }
+
+    @Provides
+    @UserScope
+    CacheRepositoriesManager provideCacheRepositoriesManager(CacheService cacheService) {
+        return new CacheRepositoriesManager(user, cacheService);
     }
 }

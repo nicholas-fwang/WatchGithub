@@ -1,39 +1,49 @@
 package io.fisache.watchgithub.ui.repositorieslist;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.util.List;
 
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BasePresenter;
+import io.fisache.watchgithub.data.cache.CacheRepositoriesManager;
 import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.Repository;
+import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.util.DateUtils;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 public class RepositoriesListActivityPresenter implements BasePresenter {
     private RepositoriesListActivity activity;
+    private User user;
     private GithubRepositoriesManager githubRepositoriesManager;
+    private CacheRepositoriesManager cacheRepositoriesManager;
     private CompositeSubscription subscription;
 
     private Resources resources;
 
     private RepoFilterType repoFilterType = RepoFilterType.ALL;
 
-    public static int REPOSPAGE = 1;
+    private int repoPage = 1;
 
     private boolean dataMore = true;
 
     private boolean cached = false;
 
-    public RepositoriesListActivityPresenter(RepositoriesListActivity activity,
-                                             GithubRepositoriesManager githubRepositoriesManager) {
+    public RepositoriesListActivityPresenter(RepositoriesListActivity activity, User user,
+                                             GithubRepositoriesManager githubRepositoriesManager,
+                                             CacheRepositoriesManager cacheRepositoriesManager) {
         this.activity = activity;
+        this.user = user;
         this.githubRepositoriesManager = githubRepositoriesManager;
+        this.cacheRepositoriesManager = cacheRepositoriesManager;
         subscription = new CompositeSubscription();
         resources = activity.getResources();
     }
@@ -43,52 +53,67 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
         if(subscription == null) {
             subscription = new CompositeSubscription();
         }
-        REPOSPAGE  = 1;
+        repoPage = cacheRepositoriesManager.getCachedRepoPage(user.login);
         setRepositories();
     }
 
     @Override
     public void unsubscribe() {
         subscription = null;
-        REPOSPAGE = 1;
     }
 
-    private void setRepositories() {
+    public void setRepositories() {
         if(!dataMore) {
             return ;
         }
-
         activity.showLoading(true);
         subscription.clear();
-        Subscription mSubscription = githubRepositoriesManager.getUserRepositories()
-                .flatMap(new Func1<List<Repository>, Observable<Repository>>() {
-                    @Override
-                    public Observable<Repository> call(List<Repository> repositories) {
-                        return Observable.from(repositories);
-                    }
-                })
-                .toList()
+        Subscription mSubscription = cacheRepositoriesManager.getUserRepositories(repoPage)
                 .subscribe(new Observer<List<Repository>>() {
                     @Override
                     public void onCompleted() {
+                        Log.d("fisache", "setRepo test completed");
                         activity.showLoading(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        activity.showLoading(false);
+                        // cache miss
+                        Log.d("fisache", "setRepo test error maybe cache miss");
+                        githubRepositoriesManager.getUserRepositories(repoPage)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Observer<List<Repository>>() {
+                                    @Override
+                                    public void onCompleted() {
+                                        activity.showLoading(false);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        activity.showLoading(false);
+                                    }
+
+                                    @Override
+                                    public void onNext(List<Repository> repositories) {
+                                        cacheRepositoriesManager.replaceCache(repositories, repoPage);
+                                        processRepositories(repositories);
+                                    }
+                                });
                     }
 
                     @Override
                     public void onNext(List<Repository> repositories) {
+                        // cache hit
+                        Log.d("fisache", "setRepo test next");
+                        Log.d("fisache", "repositories size : " + repositories.size());
                         processRepositories(repositories);
                     }
-            });
+                });
         subscription.add(mSubscription);
     }
 
     private void processRepositories(List<Repository> repositories) {
-
         // first data empty
         if(repositories.isEmpty() && OnRepoScrollListener.repoScrollLoading) {
             activity.showNotExistRepositories();
@@ -102,7 +127,7 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
             return ;
         }
 
-        // scroll
+        //scroll
 
         // next data empty
         if(repositories.isEmpty()) {
@@ -114,6 +139,8 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
             activity.setRepositories(repositories, false, false);
         }
         OnRepoScrollListener.repoScrollLoading = true;
+
+
     }
 
     public void setFilter(RepoFilterType type) {
@@ -121,14 +148,14 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
     }
 
     public void setNextRepositories() {
-        REPOSPAGE++;
+        repoPage = cacheRepositoriesManager.getCachedRepoPage(user.login) + 1;
         setRepositories();
     }
 
     void setCacheRepositories() {
         cached = true;
         activity.showLoading(true);
-        githubRepositoriesManager.getCacheUserRepositories()
+        cacheRepositoriesManager.getUserRepositories(repoPage)
                 .flatMap(new Func1<List<Repository>, Observable<Repository>>() {
                     @Override
                     public Observable<Repository> call(List<Repository> repositories) {
@@ -168,6 +195,7 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
 
                     @Override
                     public void onNext(List<Repository> repositories) {
+                        Log.d("fisache", "filter repo size : " + repositories.size());
                         activity.setRepositories(repositories, false, cached);
                     }
                 });
