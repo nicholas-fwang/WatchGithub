@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WatchGithub</string>
+    <string name="app_name">HelloGithub</string>
     <string name="github_endpoint">https://api.github.com</string>
     <integer name="repo_recent_push_terms">3</integer>
     <integer name="repo_popular_star">500</integer>
