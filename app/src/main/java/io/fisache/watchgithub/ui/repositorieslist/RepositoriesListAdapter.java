@@ -1,22 +1,16 @@
 package io.fisache.watchgithub.ui.repositorieslist;
 
 import android.content.res.Resources;
-import android.support.annotation.BoolRes;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.squareup.picasso.Picasso;
-
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.data.model.Repository;
-import io.fisache.watchgithub.ui.userslist.UsersListHolder;
 import io.fisache.watchgithub.util.DateUtils;
 
 public class RepositoriesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{

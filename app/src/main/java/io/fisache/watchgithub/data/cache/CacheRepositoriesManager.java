@@ -4,11 +4,9 @@ import android.util.Log;
 
 import java.util.List;
 
-import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
-import rx.Observer;
 import rx.functions.Action1;
 
 public class CacheRepositoriesManager {
@@ -25,14 +23,13 @@ public class CacheRepositoriesManager {
                 .doOnNext(new Action1<List<Repository>>() {
                     @Override
                     public void call(List<Repository> repositories) {
-                        Log.d("fisache", "cache hit");
+                        // cache hit
                     }
                 })
                 .doOnError(new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         // cache miss
-                        Log.d("fisache", "cache miss");
                     }
                 });
 

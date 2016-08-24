@@ -3,16 +3,11 @@ package io.fisache.watchgithub.data.cache;
 import android.app.Application;
 import android.util.Log;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.fisache.watchgithub.data.BaseService;
-import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.Repository;
-import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
-import rx.functions.Action1;
 
 public class CacheService {
 

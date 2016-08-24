@@ -17,18 +17,12 @@ import io.fisache.watchgithub.data.sqlbrite.UsersPersistenceContract.UserEntry;
 @Module
 public class DataServiceModule {
 
-    /**
-     * for Cache
-     */
     @Provides
     @Singleton
     CacheService provideCacheService(Application application) {
         return new CacheService(application);
     }
 
-    /**
-     * for Sqlbrite
-     */
     @Provides
     @Singleton
     UsersDbHelper provideUsersDbHelper(Application application) {

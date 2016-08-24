@@ -72,14 +72,12 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
                 .subscribe(new Observer<List<Repository>>() {
                     @Override
                     public void onCompleted() {
-                        Log.d("fisache", "setRepo test completed");
                         activity.showLoading(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         // cache miss
-                        Log.d("fisache", "setRepo test error maybe cache miss");
                         githubRepositoriesManager.getUserRepositories(repoPage)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
@@ -105,8 +103,6 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
                     @Override
                     public void onNext(List<Repository> repositories) {
                         // cache hit
-                        Log.d("fisache", "setRepo test next");
-                        Log.d("fisache", "repositories size : " + repositories.size());
                         processRepositories(repositories);
                     }
                 });
@@ -195,7 +191,6 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
 
                     @Override
                     public void onNext(List<Repository> repositories) {
-                        Log.d("fisache", "filter repo size : " + repositories.size());
                         activity.setRepositories(repositories, false, cached);
                     }
                 });

@@ -1,7 +1,6 @@
 package io.fisache.watchgithub.data.cache;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class LruCacheImpl extends LinkedHashMap<String, UserRepoCache> {
     private int capacity;

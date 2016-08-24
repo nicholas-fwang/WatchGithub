@@ -1,6 +1,5 @@
 package io.fisache.watchgithub.data.local;
 
-import android.util.Log;
 
 import java.util.List;
 

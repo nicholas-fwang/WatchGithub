@@ -2,7 +2,6 @@ package io.fisache.watchgithub.ui.repositorieslist;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 public class OnRepoScrollListener extends RecyclerView.OnScrollListener {
 

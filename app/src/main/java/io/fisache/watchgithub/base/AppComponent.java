@@ -16,7 +16,6 @@ import io.fisache.watchgithub.data.local.GroupModule;
                 AppModule.class,
                 GithubApiModule.class,
                 DataServiceModule.class
-                // TODO : realm, sqlbrite, retrofit, firebase service module
         }
 )
 public interface AppComponent {

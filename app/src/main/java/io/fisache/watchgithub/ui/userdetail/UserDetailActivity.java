@@ -168,7 +168,6 @@ public class UserDetailActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        textChangeSubscription.unsubscribe();
     }
 
 }

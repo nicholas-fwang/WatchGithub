@@ -1,14 +1,11 @@
 package io.fisache.watchgithub.data.github;
 
-import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 

@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -23,7 +22,6 @@ import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BaseActivity;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.Repository;
-import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivityModule;
 import io.fisache.watchgithub.util.TextUtils;
 
 public class RepositoryDetailActivity extends BaseActivity {

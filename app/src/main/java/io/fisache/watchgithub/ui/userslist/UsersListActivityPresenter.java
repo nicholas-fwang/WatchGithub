@@ -1,7 +1,6 @@
 package io.fisache.watchgithub.ui.userslist;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -78,7 +76,6 @@ public class UsersListActivityPresenter implements BasePresenter {
 
                     @Override
                     public void onNext(List<User> users) {
-//                        Log.d("fisache", "local");
                         processUsers(users);
                     }
                 });
@@ -108,7 +105,6 @@ public class UsersListActivityPresenter implements BasePresenter {
 
                             @Override
                             public void onNext(List<User> users) {
-//                                Log.d("fisache", "remote");
                                 firstStarted = false;
                                 processUsers(users);
                             }
@@ -149,7 +145,6 @@ public class UsersListActivityPresenter implements BasePresenter {
                     @Override
                     public void call(User user) {
                         if(isRemote) {
-//                            Log.d("fisache", "user updated : " + user.login);
                             usersManager.updateUser(user);
                         }
                     }
