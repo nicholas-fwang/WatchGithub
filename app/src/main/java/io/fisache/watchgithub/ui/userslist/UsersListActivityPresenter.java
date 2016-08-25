@@ -1,6 +1,7 @@
 package io.fisache.watchgithub.ui.userslist;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class UsersListActivityPresenter implements BasePresenter {
         activity.showLoading(true);
         subscription.clear();
 
-        Subscription mSubscription = applyUserFilter(usersManager.getUsers(), false)
+        Subscription mSubscription = usersManager.getUsers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<User>>() {
@@ -76,20 +77,27 @@ public class UsersListActivityPresenter implements BasePresenter {
 
                     @Override
                     public void onNext(List<User> users) {
-                        processUsers(users);
+                        usersFilterObservable(users, false)
+                                .subscribe(new Action1<List<User>>() {
+                                    @Override
+                                    public void call(List<User> users) {
+                                        processUsers(users);
+                                        activity.showLoading(false);
+                                    }
+                                });
                     }
                 });
         subscription.add(mSubscription);
     }
 
     private void processUsers(List<User> users) {
-        if(users.isEmpty()) {
+        if(users.size() == 0) {
             activity.showNotExistUsers();
         } else {
             if(firstStarted) {
                 activity.showLoading(true);
                 Subscription remoteSubscription =
-                        applyUserFilter(githubUserManager.getGithubUsers(users), true)
+                        githubUserManager.getGithubUsers(users)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<List<User>>() {
@@ -105,8 +113,14 @@ public class UsersListActivityPresenter implements BasePresenter {
 
                             @Override
                             public void onNext(List<User> users) {
-                                firstStarted = false;
-                                processUsers(users);
+                                usersFilterObservable(users, true)
+                                        .subscribe(new Action1<List<User>>() {
+                                            @Override
+                                            public void call(List<User> users) {
+                                                firstStarted = false;
+                                                processUsers(users);
+                                            }
+                                        });
                             }
                         });
                 subscription.add(remoteSubscription);
@@ -117,14 +131,8 @@ public class UsersListActivityPresenter implements BasePresenter {
         }
     }
 
-    private Observable<List<User>> applyUserFilter(Observable<List<User>> observable, final boolean isRemote) {
-        return observable
-                .flatMap(new Func1<List<User>, Observable<User>>() {
-                    @Override
-                    public Observable<User> call(List<User> users) {
-                        return Observable.from(users);
-                    }
-                })
+    private Observable<List<User>> usersFilterObservable(List<User> users, final boolean isRemote) {
+        return Observable.from(users)
                 .filter(new Func1<User, Boolean>() {
                     @Override
                     public Boolean call(User user) {
@@ -148,8 +156,7 @@ public class UsersListActivityPresenter implements BasePresenter {
                             usersManager.updateUser(user);
                         }
                     }
-                })
-                .toList();
+                }).toList();
     }
 
     public void enterGithubUser(String username) {

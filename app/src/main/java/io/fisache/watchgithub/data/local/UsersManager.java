@@ -1,9 +1,5 @@
 package io.fisache.watchgithub.data.local;
 
-
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +10,6 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class UsersManager implements BaseService {
@@ -26,11 +21,9 @@ public class UsersManager implements BaseService {
 
     @Override
     public Observable<List<User>> getUsers() {
-        Observable<List<User>> localUsers = sqlbriteService.getUsers();
+        final Observable<List<User>> localUsers = sqlbriteService.getUsers();
 
-//        return localUsers;
-
-        return Observable.concat(localUsers, localUsers).first();
+        return localUsers;
     }
 
     // not used
