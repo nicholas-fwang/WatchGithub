@@ -5,14 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
 
 import java.util.List;
 
-import javax.inject.Inject;
 
 import io.fisache.watchgithub.data.BaseService;
 import io.fisache.watchgithub.data.model.User;
@@ -50,6 +48,13 @@ public class SqlbriteService implements BaseService {
                 TextUtils.join(",", UsersPersistenceContract.projection), UserEntry.TABLE_NAME, UserEntry.COLUMN_NAME_ENTRY_ID);
         return databaseHelper.createQuery(UserEntry.TABLE_NAME, sql, Long.toString(userId))
                 .mapToOneOrDefault(userMapperFunction, null);
+    }
+
+    public Observable<List<User>> searchUsersWithPattern(String pattern) {
+        String sql = String.format("SELECT %s FROM %s WHERE %s LIKE \'%%" + pattern + "%%\'",
+                TextUtils.join(",", UsersPersistenceContract.projection), UserEntry.TABLE_NAME, UserEntry.COLUMN_NAME_LOGIN);
+        return databaseHelper.createQuery(UserEntry.TABLE_NAME, sql)
+                .mapToList(userMapperFunction);
     }
 
     @Override

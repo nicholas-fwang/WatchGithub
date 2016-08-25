@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.userslist.UsersListActivity"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ui.userdetail.UserDetailActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.repositorieslist.RepositoriesListActivity"

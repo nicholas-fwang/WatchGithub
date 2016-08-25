@@ -69,4 +69,8 @@ public class UsersManager implements BaseService {
     public void updateDesc(User user) {
         sqlbriteService.updateDesc(user);
     }
+
+    public Observable<List<User>> searchUserWithPattern(String pattern) {
+        return sqlbriteService.searchUsersWithPattern(pattern);
+    }
 }

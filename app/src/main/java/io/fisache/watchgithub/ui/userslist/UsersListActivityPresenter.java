@@ -1,9 +1,9 @@
 package io.fisache.watchgithub.ui.userslist;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BasePresenter;
@@ -187,5 +187,31 @@ public class UsersListActivityPresenter implements BasePresenter {
 
     void setFilter(UserFilterType type) {
         userFilterType = type;
+    }
+
+    Subscription observeSearchText(Observable<CharSequence> observable) {
+        return observable
+                .map(new Func1<CharSequence, String>() {
+                    @Override
+                    public String call(CharSequence charSequence) {
+                        String pattern = new StringBuilder(charSequence).toString();
+                        return pattern;
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .debounce(200, TimeUnit.MILLISECONDS)
+                .switchMap(new Func1<String, Observable<List<User>>>() {
+                    @Override
+                    public Observable<List<User>> call(String s) {
+                        return usersManager.searchUserWithPattern(s);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<User>>() {
+                    @Override
+                    public void call(List<User> users) {
+                        activity.setUsers(users);
+                    }
+                });
     }
 }

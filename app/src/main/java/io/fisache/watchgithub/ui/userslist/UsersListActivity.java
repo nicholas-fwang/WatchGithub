@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +20,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.jakewharton.rxbinding.widget.RxTextView;
+import com.jakewharton.rxbinding.widget.TextViewTextChangeEvent;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -33,6 +39,13 @@ import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivity;
 import io.fisache.watchgithub.ui.userdetail.UserDetailActivity;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class UsersListActivity extends BaseActivity {
 
@@ -54,6 +67,9 @@ public class UsersListActivity extends BaseActivity {
     @Bind(R.id.btnAdd)
     FloatingActionButton btnAdd;
 
+    @Bind(R.id.etSearch)
+    EditText etSearch;
+
     @Inject
     UsersListActivityPresenter presenter;
     @Inject
@@ -64,6 +80,8 @@ public class UsersListActivity extends BaseActivity {
     LinearLayoutManager linearLayoutManager;
     @Inject
     AlertDialog.Builder addAlertDialog;
+
+    private Subscription searchSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +101,14 @@ public class UsersListActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         presenter.subscribe();
+        searchSubscription = presenter.observeSearchText(RxTextView.textChanges(etSearch));
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         presenter.unsubscribe();
+        searchSubscription.unsubscribe();
     }
 
     @Override
