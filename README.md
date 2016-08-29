@@ -89,8 +89,8 @@ Update :  - Update is performed when requests repositories when the repositories
 Delete :  - Cache is implemented with LinkedHashMap of Java, and follows the replacement policy of <a href="https://en.wikipedia.org/wiki/Cache_algorithms#LRU">LRU</a>.
           So, <a href="https://en.wikipedia.org/wiki/Cache_algorithms#LRU">Least Rencently Used</a> data is removed when save new data to cache in full capacity.
 </pre>
-# Blog
-1. Introduction to `WatchGithub` <br />
+# Articles
+1. <a href="https://fisache.github.io/Introduction-WatchGithub/">Introduction to `WatchGithub`</a> <br />
 2. Construct MVP pattern with `Dagger2` <br />
 3. Use `sqlbrite` using `RxJava` <br />
 4. Use `retrofit` with `RxJava` <br />
