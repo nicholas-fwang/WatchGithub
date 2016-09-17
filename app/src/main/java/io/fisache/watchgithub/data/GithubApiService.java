@@ -3,6 +3,7 @@ package io.fisache.watchgithub.data;
 import java.util.List;
 
 import io.fisache.watchgithub.data.model.RepositoryResponse;
+import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.data.model.UserResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -20,9 +21,9 @@ public interface GithubApiService {
             @Path("username") String username, @Query("page") int page
     );
 
-    void createGithubUser(UserResponse userResponse);
+    void createGithubUser(User user);
 
-    void updateGithubUser(UserResponse userResponse);
+    void updateGithubUser(User user);
 
     void deleteGithubUser(String login);
 

@@ -1,6 +1,8 @@
 package io.fisache.watchgithub.data.manager;
 
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.List;
 
 import io.fisache.watchgithub.data.GithubApiService;
@@ -62,5 +64,25 @@ public class GithubUserManager {
                     }
                 })
                 .toList();
+    }
+
+    @VisibleForTesting
+    public void createUser(User user) {
+        githubApiService.createGithubUser(user);
+    }
+
+    @VisibleForTesting
+    public void updateUser(User user) {
+        githubApiService.updateGithubUser(user);
+    }
+
+    @VisibleForTesting
+    public void deleteUser(String login) {
+        githubApiService.deleteGithubUser(login);
+    }
+
+    @VisibleForTesting
+    public void deleteUserAll() {
+        githubApiService.deleteGithubUserAll();
     }
 }

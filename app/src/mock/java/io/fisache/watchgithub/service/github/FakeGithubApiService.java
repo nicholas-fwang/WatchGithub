@@ -8,12 +8,14 @@ import java.util.Map;
 
 import io.fisache.watchgithub.data.GithubApiService;
 import io.fisache.watchgithub.data.model.RepositoryResponse;
+import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.data.model.UserResponse;
+import io.fisache.watchgithub.service.TestUtils;
 import rx.Observable;
 
 public class FakeGithubApiService implements GithubApiService{
 
-    private static Map<String, UserResponse> USER_GITHUB_DATA;
+    private static Map<String, User> USER_GITHUB_DATA;
     private static Map<String, List<RepositoryResponse>> REPO_GITHUB_DATA;
 
     static {
@@ -23,7 +25,7 @@ public class FakeGithubApiService implements GithubApiService{
 
     @Override
     public Observable<UserResponse> getGithubUser(String username) {
-        return Observable.just(USER_GITHUB_DATA.get(username));
+        return Observable.just(TestUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
     }
 
     @Override
@@ -32,13 +34,13 @@ public class FakeGithubApiService implements GithubApiService{
     }
 
     @VisibleForTesting
-    public void createGithubUser(UserResponse userResponse) {
-        USER_GITHUB_DATA.put(userResponse.login, userResponse);
+    public void createGithubUser(User user) {
+        USER_GITHUB_DATA.put(user.login, user);
     }
 
     @VisibleForTesting
-    public void updateGithubUser(UserResponse userResponse) {
-        USER_GITHUB_DATA.put(userResponse.login, userResponse);
+    public void updateGithubUser(User user) {
+        USER_GITHUB_DATA.put(user.login, user);
     }
 
     @VisibleForTesting

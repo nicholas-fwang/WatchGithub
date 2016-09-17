@@ -26,7 +26,7 @@ public class BaseApplication extends Application {
         initAppComponent();
     }
 
-    private void initAppComponent() {
+    public void initAppComponent() {
         // TODO : dagger component
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))

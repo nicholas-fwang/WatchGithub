@@ -1,5 +1,7 @@
 package io.fisache.watchgithub.data.manager;
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +46,25 @@ public class GithubRepositoriesManager {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    @VisibleForTesting
+    public void createRepos(String login, List<RepositoryResponse> repos) {
+        githubApiService.createGithubRepos(login, repos);
+    }
+
+    @VisibleForTesting
+    public void updateRepos(String login, List<RepositoryResponse> repos) {
+        githubApiService.updateGithubRepos(login, repos);
+    }
+
+    @VisibleForTesting
+    public void deleteRepos(String login) {
+        githubApiService.deleteGithubRepos(login);
+    }
+
+    @VisibleForTesting
+    public void deleteReposAll() {
+        githubApiService.deletGithubReposAll();
     }
 }

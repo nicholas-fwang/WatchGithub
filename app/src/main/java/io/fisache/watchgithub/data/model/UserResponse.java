@@ -1,5 +1,7 @@
 package io.fisache.watchgithub.data.model;
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.Date;
 
 public class UserResponse {
@@ -29,4 +31,16 @@ public class UserResponse {
     public int following;
     public Date created_at;
     public Date updated_at;
+
+    @VisibleForTesting
+    public UserResponse(long id, String login, String name, String avatar_url, String email, int followers,
+                        String type) {
+        this.id = id;
+        this.login = login;
+        this.name = name;
+        this.avatar_url = avatar_url;
+        this.email = email;
+        this.followers = followers;
+        this.type = type;
+    }
 }
