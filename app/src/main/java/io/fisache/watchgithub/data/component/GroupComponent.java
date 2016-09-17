@@ -1,6 +1,7 @@
-package io.fisache.watchgithub.data.local;
+package io.fisache.watchgithub.data.component;
 
 import dagger.Subcomponent;
+import io.fisache.watchgithub.data.module.GroupModule;
 import io.fisache.watchgithub.scope.GroupScope;
 import io.fisache.watchgithub.ui.userdetail.UserDetailActivityModule;
 import io.fisache.watchgithub.ui.userdetail.UserDetailComponent;

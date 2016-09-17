@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data.sqlbrite;
+package io.fisache.watchgithub.service.sqlbrite;
 
 import android.provider.BaseColumns;
 

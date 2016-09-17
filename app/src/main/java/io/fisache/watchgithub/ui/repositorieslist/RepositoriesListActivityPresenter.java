@@ -1,14 +1,13 @@
 package io.fisache.watchgithub.ui.repositorieslist;
 
 import android.content.res.Resources;
-import android.util.Log;
 
 import java.util.List;
 
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BasePresenter;
-import io.fisache.watchgithub.data.cache.CacheRepositoriesManager;
-import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
+import io.fisache.watchgithub.data.manager.CacheRepositoriesManager;
+import io.fisache.watchgithub.data.manager.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.util.DateUtils;

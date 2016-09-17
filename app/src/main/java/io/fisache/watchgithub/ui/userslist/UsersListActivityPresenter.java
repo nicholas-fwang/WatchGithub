@@ -8,8 +8,8 @@ import java.util.concurrent.TimeUnit;
 import io.fisache.watchgithub.R;
 import io.fisache.watchgithub.base.BasePresenter;
 import io.fisache.watchgithub.base.Validator;
-import io.fisache.watchgithub.data.github.GithubUserManager;
-import io.fisache.watchgithub.data.local.UsersManager;
+import io.fisache.watchgithub.data.manager.GithubUserManager;
+import io.fisache.watchgithub.data.manager.UsersManager;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;
 import rx.Observer;
@@ -203,7 +203,7 @@ public class UsersListActivityPresenter implements BasePresenter {
                 .switchMap(new Func1<String, Observable<List<User>>>() {
                     @Override
                     public Observable<List<User>> call(String s) {
-                        return usersManager.searchUserWithPattern(s);
+                        return usersManager.searchUsersWithPattern(s);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())

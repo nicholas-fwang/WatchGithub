@@ -1,8 +1,10 @@
-package io.fisache.watchgithub.data.github;
+package io.fisache.watchgithub.data.manager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.fisache.watchgithub.service.github.GithubApiService;
+import io.fisache.watchgithub.data.model.RepositoryResponse;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;

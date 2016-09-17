@@ -3,10 +3,10 @@ package io.fisache.watchgithub.base;
 import android.app.Application;
 import android.content.Context;
 
-import io.fisache.watchgithub.data.github.GithubUserComponent;
-import io.fisache.watchgithub.data.github.GithubUserModule;
-import io.fisache.watchgithub.data.local.GroupComponent;
-import io.fisache.watchgithub.data.local.GroupModule;
+import io.fisache.watchgithub.data.component.GithubUserComponent;
+import io.fisache.watchgithub.data.module.GithubUserModule;
+import io.fisache.watchgithub.data.component.GroupComponent;
+import io.fisache.watchgithub.data.module.GroupModule;
 import io.fisache.watchgithub.data.model.User;
 
 public class BaseApplication extends Application {

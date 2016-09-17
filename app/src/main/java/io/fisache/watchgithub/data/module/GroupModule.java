@@ -1,8 +1,9 @@
-package io.fisache.watchgithub.data.local;
+package io.fisache.watchgithub.data.module;
 
 import dagger.Module;
 import dagger.Provides;
-import io.fisache.watchgithub.data.sqlbrite.SqlbriteService;
+import io.fisache.watchgithub.data.BaseService;
+import io.fisache.watchgithub.data.manager.UsersManager;
 import io.fisache.watchgithub.scope.GroupScope;
 
 @Module
@@ -14,7 +15,7 @@ public class GroupModule {
 
     @Provides
     @GroupScope
-    UsersManager provideUsersManager(SqlbriteService sqlbriteService) {
+    UsersManager provideUsersManager(BaseService sqlbriteService) {
         return new UsersManager(sqlbriteService);
     }
 }

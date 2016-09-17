@@ -1,11 +1,10 @@
-package io.fisache.watchgithub.data.local;
+package io.fisache.watchgithub.data.manager;
 
 import java.util.List;
 
 
 import io.fisache.watchgithub.data.BaseService;
 import io.fisache.watchgithub.data.model.User;
-import io.fisache.watchgithub.data.sqlbrite.SqlbriteService;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -13,9 +12,9 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class UsersManager implements BaseService {
-    private SqlbriteService sqlbriteService;
+    private BaseService sqlbriteService;
 
-    public UsersManager(SqlbriteService sqlbriteService) {
+    public UsersManager(BaseService sqlbriteService) {
         this.sqlbriteService = sqlbriteService;
     }
 
@@ -70,7 +69,8 @@ public class UsersManager implements BaseService {
         sqlbriteService.updateDesc(user);
     }
 
-    public Observable<List<User>> searchUserWithPattern(String pattern) {
+    @Override
+    public Observable<List<User>> searchUsersWithPattern(String pattern) {
         return sqlbriteService.searchUsersWithPattern(pattern);
     }
 }

@@ -1,8 +1,8 @@
 package io.fisache.watchgithub.mock.inject;
 
-import io.fisache.watchgithub.data.github.GithubApiModule;
-import io.fisache.watchgithub.data.github.GithubApiService;
-import io.fisache.watchgithub.data.github.GithubUserManager;
+import io.fisache.watchgithub.service.github.GithubApiModule;
+import io.fisache.watchgithub.service.github.GithubApiService;
+import io.fisache.watchgithub.data.manager.GithubUserManager;
 
 public class GithubApiModuleMock extends GithubApiModule {
 

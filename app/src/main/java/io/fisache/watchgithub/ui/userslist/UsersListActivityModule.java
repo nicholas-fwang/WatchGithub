@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import dagger.Module;
 import dagger.Provides;
 import io.fisache.watchgithub.base.Validator;
-import io.fisache.watchgithub.data.github.GithubUserManager;
-import io.fisache.watchgithub.data.local.UsersManager;
+import io.fisache.watchgithub.data.manager.GithubUserManager;
+import io.fisache.watchgithub.data.manager.UsersManager;
 import io.fisache.watchgithub.scope.ActivityScope;
 
 @Module

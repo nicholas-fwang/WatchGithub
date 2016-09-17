@@ -4,8 +4,8 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import dagger.Module;
 import dagger.Provides;
-import io.fisache.watchgithub.data.cache.CacheRepositoriesManager;
-import io.fisache.watchgithub.data.github.GithubRepositoriesManager;
+import io.fisache.watchgithub.data.manager.CacheRepositoriesManager;
+import io.fisache.watchgithub.data.manager.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.scope.ActivityScope;
 

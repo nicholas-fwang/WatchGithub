@@ -23,8 +23,8 @@ public class GithubUserModule {
 
     @Provides
     @UserScope
-    GithubRepositoriesManager provideGithubRepositoriesManager(User user, GithubApiService githubApiService) {
-        return new GithubRepositoriesManager(user, githubApiService);
+    GithubRepositoriesManager provideGithubRepositoriesManager(User user) {
+        return new GithubRepositoriesManager(user);
     }
 
     @Provides

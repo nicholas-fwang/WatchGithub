@@ -20,4 +20,5 @@ public interface BaseService {
 
     void deleteUser(long userId);
 
+    Observable<List<User>> searchUsersWithPattern(String pattern);
 }

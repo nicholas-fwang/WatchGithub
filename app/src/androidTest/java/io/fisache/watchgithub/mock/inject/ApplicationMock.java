@@ -4,9 +4,9 @@ import io.fisache.watchgithub.base.AppComponent;
 import io.fisache.watchgithub.base.AppModule;
 import io.fisache.watchgithub.base.BaseApplication;
 import io.fisache.watchgithub.base.DaggerAppComponent;
-import io.fisache.watchgithub.data.github.GithubApiModule;
-import io.fisache.watchgithub.data.local.GroupComponent;
-import io.fisache.watchgithub.data.local.GroupModule;
+import io.fisache.watchgithub.service.github.GithubApiModule;
+import io.fisache.watchgithub.data.component.GroupComponent;
+import io.fisache.watchgithub.data.module.GroupModule;
 
 public class ApplicationMock extends BaseApplication {
     private AppComponent appComponent;

@@ -1,7 +1,9 @@
-package io.fisache.watchgithub.data.github;
+package io.fisache.watchgithub.service.github;
 
 import java.util.List;
 
+import io.fisache.watchgithub.data.model.RepositoryResponse;
+import io.fisache.watchgithub.data.model.UserResponse;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;

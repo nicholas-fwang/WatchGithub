@@ -1,9 +1,7 @@
 package io.fisache.watchgithub.mock.inject;
 
-import io.fisache.watchgithub.data.cache.CacheService;
-import io.fisache.watchgithub.data.local.GroupModule;
-import io.fisache.watchgithub.data.local.UsersManager;
-import io.fisache.watchgithub.scope.GroupScope;
+import io.fisache.watchgithub.data.module.GroupModule;
+import io.fisache.watchgithub.data.manager.UsersManager;
 
 public class GroupModuleMock extends GroupModule {
 

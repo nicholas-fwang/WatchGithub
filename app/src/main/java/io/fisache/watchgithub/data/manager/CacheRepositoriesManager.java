@@ -1,9 +1,9 @@
-package io.fisache.watchgithub.data.cache;
-
-import android.util.Log;
+package io.fisache.watchgithub.data.manager;
 
 import java.util.List;
 
+import io.fisache.watchgithub.data.cache.CacheService;
+import io.fisache.watchgithub.data.cache.UserRepoCache;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
 import rx.Observable;

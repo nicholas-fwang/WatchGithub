@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data.local;
+package io.fisache.watchgithub.service.sqlbrite;
 
 import android.app.Application;
 import android.database.Cursor;
@@ -7,15 +7,14 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.fisache.watchgithub.data.BaseService;
 import io.fisache.watchgithub.data.cache.CacheService;
 import io.fisache.watchgithub.data.model.User;
-import io.fisache.watchgithub.data.sqlbrite.SqlbriteService;
-import io.fisache.watchgithub.data.sqlbrite.UsersDbHelper;
 import rx.functions.Func1;
-import io.fisache.watchgithub.data.sqlbrite.UsersPersistenceContract.UserEntry;
+import io.fisache.watchgithub.service.sqlbrite.UsersPersistenceContract.UserEntry;
 
 @Module
-public class DataServiceModule {
+public class SqlbriteModule {
 
     @Provides
     @Singleton
@@ -50,7 +49,7 @@ public class DataServiceModule {
 
     @Provides
     @Singleton
-    SqlbriteService provideSqlbriteService(Application application, UsersDbHelper usersDbHelper,Func1<Cursor, User> userMapperFunction) {
+    BaseService provideSqlbriteService(Application application, UsersDbHelper usersDbHelper, Func1<Cursor, User> userMapperFunction) {
         return new SqlbriteService(application, usersDbHelper, userMapperFunction);
     }
 }

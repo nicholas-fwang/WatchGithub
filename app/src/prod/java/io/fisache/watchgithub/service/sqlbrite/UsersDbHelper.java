@@ -1,11 +1,8 @@
-package io.fisache.watchgithub.data.sqlbrite;
+package io.fisache.watchgithub.service.sqlbrite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import io.fisache.watchgithub.ui.userslist.UsersListActivity;
 
 public class UsersDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;

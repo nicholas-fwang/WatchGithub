@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data.github;
+package io.fisache.watchgithub.data.model;
 
 import java.util.Date;
 

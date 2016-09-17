@@ -1,6 +1,5 @@
 package io.fisache.watchgithub.mock.tests;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
@@ -17,15 +16,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import io.fisache.watchgithub.R;
-import io.fisache.watchgithub.data.github.GithubUserManager;
-import io.fisache.watchgithub.data.local.UsersManager;
+import io.fisache.watchgithub.data.manager.GithubUserManager;
+import io.fisache.watchgithub.data.manager.UsersManager;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.mock.inject.ApplicationMock;
 import io.fisache.watchgithub.mock.inject.GithubApiModuleMock;
@@ -74,7 +69,7 @@ public class UsersListActivitiyUITest {
     }
 
     @After
-    public void finish() {
+    public void tearDown() {
 
     }
 
@@ -86,7 +81,8 @@ public class UsersListActivitiyUITest {
     public void showErrorSnackbar_wrongGithubUser() {
         Mockito.when(githubUserManagerMock.getGithubUser(anyString()))
                 .thenReturn(Observable.<User>error(new RuntimeException("test")));
-
+        Mockito.when(usersManagerMock.getUsers())
+                .thenReturn(Observable.<List<User>>error(new RuntimeException("test")));
         enterUser("fisache");
 
         onView(withText("Write down exactly")).check(matches(isDisplayed()));
