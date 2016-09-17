@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.data.local;
+package io.fisache.watchgithub.service.sqlbrite;
 
 import android.app.Application;
 
@@ -6,11 +6,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.fisache.watchgithub.data.BaseService;
 import io.fisache.watchgithub.data.cache.CacheService;
-import io.fisache.watchgithub.data.sqlbrite.SqlbriteService;
 
 @Module
-public class DataServiceModule {
+public class SqlbriteModule {
     @Provides
     @Singleton
     CacheService provideCacheService(Application application) {
@@ -19,7 +19,7 @@ public class DataServiceModule {
 
     @Provides
     @Singleton
-    SqlbriteService provideSqlbriteService() {
-        return new SqlbriteService();
+    BaseService provideFakeSqlbriteService() {
+        return new FakeSqlbriteService();
     }
 }

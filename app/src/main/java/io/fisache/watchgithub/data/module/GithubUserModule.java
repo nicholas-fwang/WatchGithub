@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 import io.fisache.watchgithub.data.manager.CacheRepositoriesManager;
 import io.fisache.watchgithub.data.cache.CacheService;
-import io.fisache.watchgithub.service.github.GithubApiService;
+import io.fisache.watchgithub.data.GithubApiService;
 import io.fisache.watchgithub.data.manager.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.scope.UserScope;

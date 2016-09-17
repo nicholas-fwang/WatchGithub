@@ -1,4 +1,4 @@
-package io.fisache.watchgithub.service.github;
+package io.fisache.watchgithub.data;
 
 import java.util.List;
 
@@ -19,4 +19,20 @@ public interface GithubApiService {
     Observable<List<RepositoryResponse>> getGithubRepositories(
             @Path("username") String username, @Query("page") int page
     );
+
+    void createGithubUser(UserResponse userResponse);
+
+    void updateGithubUser(UserResponse userResponse);
+
+    void deleteGithubUser(String login);
+
+    void deleteGithubUserAll();
+
+    void createGithubRepos(String login, List<RepositoryResponse> repositoryResponse);
+
+    void updateGithubRepos(String login, List<RepositoryResponse> repositoryResponse);
+
+    void deleteGithubRepos(String login);
+
+    void deletGithubReposAll();
 }

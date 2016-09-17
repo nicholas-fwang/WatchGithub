@@ -9,6 +9,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import io.fisache.watchgithub.R;
+import io.fisache.watchgithub.data.GithubApiService;
 import io.fisache.watchgithub.data.manager.GithubUserManager;
 import okhttp3.OkHttpClient;
 import retrofit2.GsonConverterFactory;
