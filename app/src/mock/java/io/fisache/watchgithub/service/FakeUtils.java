@@ -3,7 +3,7 @@ package io.fisache.watchgithub.service;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.data.model.UserResponse;
 
-public class TestUtils {
+public class FakeUtils {
 
     public static UserResponse convertUserToResponse(User user) {
         return new UserResponse(user.id, user.login, user.name, user.avatar_url,

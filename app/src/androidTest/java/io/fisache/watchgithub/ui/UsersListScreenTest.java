@@ -7,6 +7,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +38,8 @@ import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard
 @LargeTest
 public class UsersListScreenTest {
 
+    ApplicationTest app;
+
     GithubUserManager githubUserManager;
     UsersManager usersManager;
 
@@ -46,7 +49,7 @@ public class UsersListScreenTest {
 
     @Before
     public void setup() {
-        ApplicationTest app = (ApplicationTest) InstrumentationRegistry.getTargetContext().getApplicationContext();
+        app = (ApplicationTest) InstrumentationRegistry.getTargetContext().getApplicationContext();
         app.setupAppComponent();
         app.createGroupComponent();
 
@@ -58,6 +61,11 @@ public class UsersListScreenTest {
 
         Intent startIntent = new Intent();
         usersListActivityActivityTestRule.launchActivity(startIntent);
+    }
+
+    @After
+    public void tearDown() {
+        app.releaseGroupComponent();
     }
 
     @Test
@@ -137,6 +145,23 @@ public class UsersListScreenTest {
         onView(withId(R.id.rvUserList)).check(matches(hasDescendant(not(withText("Plain User")))));
         onView(withId(R.id.rvUserList)).check(matches(hasDescendant(not(withText("Popular User")))));
         onView(withId(R.id.rvUserList)).check(matches(hasDescendant(withText("Org User"))));
+    }
+
+    /**
+     * TODO : It has tested if only one user, then have to modify to test for one more data
+     */
+    @Test
+    public void updateDescription_checkDisplayed() {
+        String updateDesc = "Test";
+        enterUser(UserDummy.newInstance());
+        onView(withId(R.id.ivSetting)).perform(click());
+
+        onView(withId(R.id.tvDesc)).perform(click());
+        onView(withId(R.id.etDesc)).perform(typeText(updateDesc), closeSoftKeyboard());
+        onView(withText("Save")).perform(click());
+        onView(withId(R.id.btnEdit)).perform(click());
+
+        onView(withId(R.id.rvUserList)).check(matches(hasDescendant(withText(updateDesc))));
     }
 
     private User enterUser(User user) {

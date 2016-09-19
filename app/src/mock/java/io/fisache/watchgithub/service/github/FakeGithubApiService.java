@@ -10,7 +10,7 @@ import io.fisache.watchgithub.data.GithubApiService;
 import io.fisache.watchgithub.data.model.RepositoryResponse;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.data.model.UserResponse;
-import io.fisache.watchgithub.service.TestUtils;
+import io.fisache.watchgithub.service.FakeUtils;
 import rx.Observable;
 
 public class FakeGithubApiService implements GithubApiService{
@@ -25,11 +25,10 @@ public class FakeGithubApiService implements GithubApiService{
 
     @Override
     public Observable<UserResponse> getGithubUser(String username) {
-//        return Observable.just(TestUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
         if(USER_GITHUB_DATA.get(username) == null) {
             return Observable.error(new RuntimeException("Not Signed User"));
         } else {
-            return Observable.just(TestUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
+            return Observable.just(FakeUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
         }
     }
 

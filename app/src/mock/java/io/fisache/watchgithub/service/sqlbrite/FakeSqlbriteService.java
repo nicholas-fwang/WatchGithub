@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import io.fisache.watchgithub.data.BaseService;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.service.FakeUtils;
 import rx.Observable;
 
 public class FakeSqlbriteService implements BaseService {
@@ -25,7 +26,11 @@ public class FakeSqlbriteService implements BaseService {
 
     @Override
     public Observable<User> getUser(long userId) {
-        return Observable.just(USER_LOCAL_DATA.get(userId));
+        if(USER_LOCAL_DATA.get(userId) == null) {
+            return Observable.error(new RuntimeException("Delete User"));
+        } else {
+            return Observable.just(USER_LOCAL_DATA.get(userId));
+        }
     }
 
     @Override

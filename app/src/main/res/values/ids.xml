@@ -3,4 +3,5 @@
     <item name="etGithubId" type="id" />
     <item name="btnIdYes" type="id" />
     <item name="btnIdNo" type="id" />
+    <item name="etDesc" type="id" />
 </resources>

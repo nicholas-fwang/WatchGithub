@@ -140,6 +140,7 @@ public class UserDetailActivity extends BaseActivity {
         editDialog.setMessage("Be sure to enter");
 
         final EditText etDesc = new EditText(this);
+        etDesc.setId(R.id.etDesc);
         editDialog.setView(etDesc);
 
         editDialog.setPositiveButton("Save", new DialogInterface.OnClickListener() {
