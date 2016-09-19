@@ -11,6 +11,7 @@ import io.fisache.watchgithub.base.Validator;
 import io.fisache.watchgithub.data.manager.GithubUserManager;
 import io.fisache.watchgithub.data.manager.UsersManager;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.service.SchedulerProvider;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -33,6 +34,8 @@ public class UsersListActivityPresenter implements BasePresenter {
     private UserFilterType userFilterType = UserFilterType.ALL;
 
     private static boolean firstStarted = true;
+
+    private SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
 
     public UsersListActivityPresenter(UsersListActivity activity, UsersManager usersManager,
                                       GithubUserManager githubUserManager, Validator validator) {
@@ -62,8 +65,8 @@ public class UsersListActivityPresenter implements BasePresenter {
         subscription.clear();
 
         Subscription mSubscription = usersManager.getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
                 .subscribe(new Observer<List<User>>() {
                     @Override
                     public void onCompleted() {
@@ -98,8 +101,8 @@ public class UsersListActivityPresenter implements BasePresenter {
                 activity.showLoading(true);
                 Subscription remoteSubscription =
                         githubUserManager.getGithubUsers(users)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(schedulerProvider.io())
+                                .observeOn(schedulerProvider.ui())
                         .subscribe(new Observer<List<User>>() {
                             @Override
                             public void onCompleted() {
@@ -185,7 +188,7 @@ public class UsersListActivityPresenter implements BasePresenter {
         }
     }
 
-    void setFilter(UserFilterType type) {
+    public void setFilter(UserFilterType type) {
         userFilterType = type;
     }
 

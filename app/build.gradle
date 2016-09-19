@@ -83,6 +83,7 @@ dependencies {
     // Test dependencies
     testCompile rootProject.ext.junit
     testCompile rootProject.ext.supportAnnotations
+    testCompile rootProject.ext.mockito
 
     // Android Test dependencies
     androidTestCompile rootProject.ext.junit
