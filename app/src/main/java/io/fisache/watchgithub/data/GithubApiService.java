@@ -2,6 +2,7 @@ package io.fisache.watchgithub.data;
 
 import java.util.List;
 
+import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.RepositoryResponse;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.data.model.UserResponse;
@@ -29,9 +30,9 @@ public interface GithubApiService {
 
     void deleteGithubUserAll();
 
-    void createGithubRepos(String login, List<RepositoryResponse> repositoryResponse);
+    void createGithubRepos(String login, List<Repository> repositoryResponse);
 
-    void updateGithubRepos(String login, List<RepositoryResponse> repositoryResponse);
+    void updateGithubRepos(String login, List<Repository> repositoryResponse);
 
     void deleteGithubRepos(String login);
 

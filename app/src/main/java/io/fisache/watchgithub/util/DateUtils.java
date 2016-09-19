@@ -24,6 +24,11 @@ public class DateUtils {
         return new Date(parsed.getTime());
     }
 
+    public static String convertDateToString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return sdf.format(date);
+    }
+
     public static long differInDate(Date from, Date to) {
         return (to.getTime() - from.getTime()) / MILLISECONDS_IN_DAY;
     }

@@ -27,6 +27,17 @@ public class Repository implements Parcelable {
 
     }
 
+    public Repository(long id, String name, String html_url, String desc, int star_count, int fork_count, boolean fork, String pushed_at) {
+        this.id = id;
+        this.name = name;
+        this.html_url = html_url;
+        this.desc = desc;
+        this.star_count = star_count;
+        this.fork_count = fork_count;
+        this.fork = fork;
+        this.pushed_at = pushed_at;
+    }
+
     protected Repository(Parcel in) {
         id = in.readLong();
         name = in.readString();

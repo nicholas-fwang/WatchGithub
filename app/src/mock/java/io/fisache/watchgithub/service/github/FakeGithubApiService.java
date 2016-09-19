@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.fisache.watchgithub.data.GithubApiService;
+import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.RepositoryResponse;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.data.model.UserResponse;
@@ -16,7 +17,7 @@ import rx.Observable;
 public class FakeGithubApiService implements GithubApiService{
 
     private static Map<String, User> USER_GITHUB_DATA;
-    private static Map<String, List<RepositoryResponse>> REPO_GITHUB_DATA;
+    private static Map<String, List<Repository>> REPO_GITHUB_DATA;
 
     static {
         USER_GITHUB_DATA = new LinkedHashMap<>();
@@ -34,7 +35,11 @@ public class FakeGithubApiService implements GithubApiService{
 
     @Override
     public Observable<List<RepositoryResponse>> getGithubRepositories(String username, int page) {
-        return Observable.from(REPO_GITHUB_DATA.get(username)).toList();
+        if(REPO_GITHUB_DATA.get(username) == null) {
+            return Observable.error(new RuntimeException("Not signed User"));
+        } else {
+            return Observable.from(FakeUtils.convertReposToResponses(REPO_GITHUB_DATA.get(username))).toList();
+        }
     }
 
     @VisibleForTesting
@@ -58,13 +63,13 @@ public class FakeGithubApiService implements GithubApiService{
     }
 
     @VisibleForTesting
-    public void createGithubRepos(String login, List<RepositoryResponse> repositoryResponse) {
-        REPO_GITHUB_DATA.put(login, repositoryResponse);
+    public void createGithubRepos(String login, List<Repository> repositories) {
+        REPO_GITHUB_DATA.put(login, repositories);
     }
 
     @VisibleForTesting
-    public void updateGithubRepos(String login, List<RepositoryResponse> repositoryResponse) {
-        REPO_GITHUB_DATA.put(login, repositoryResponse);
+    public void updateGithubRepos(String login, List<Repository> repositories) {
+        REPO_GITHUB_DATA.put(login, repositories);
     }
 
     @VisibleForTesting

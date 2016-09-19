@@ -52,4 +52,8 @@ public class CacheRepositoriesManager {
         cacheService.setUserRepoPage(login, page);
     }
 
+    public void deleteCacheAll() {
+        cacheService.deleteCacheAll();
+    }
+
 }

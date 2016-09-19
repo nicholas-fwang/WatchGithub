@@ -13,8 +13,8 @@ import io.fisache.watchgithub.data.cache.CacheService;
 public class SqlbriteModule {
     @Provides
     @Singleton
-    CacheService provideCacheService(Application application) {
-        return new CacheService(application);
+    CacheService provideCacheService() {
+        return new CacheService();
     }
 
     @Provides

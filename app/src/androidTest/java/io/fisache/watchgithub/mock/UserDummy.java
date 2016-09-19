@@ -8,6 +8,6 @@ public class UserDummy {
     public static User newInstance() {
         int random = new Random().nextInt(1000);
         return new User(random, "User"+random, "Name"+random, "URL"+random, "Email"+random,
-                random, "User", "");
+                random + new Random().nextInt(1000), "User", "");
     }
 }

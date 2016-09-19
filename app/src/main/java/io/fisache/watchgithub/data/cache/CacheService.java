@@ -1,6 +1,5 @@
 package io.fisache.watchgithub.data.cache;
 
-import android.app.Application;
 import android.util.Log;
 
 import java.util.List;
@@ -11,16 +10,13 @@ import rx.Observable;
 
 public class CacheService {
 
-    private Application application;
-
     protected static Map<String, UserRepoCache> USER_CACHE_DATA;
 
     static {
         USER_CACHE_DATA = new LruCacheImpl(5, 0.75f);
     }
 
-    public CacheService(Application application) {
-        this.application = application;
+    public CacheService() {
     }
 
     public Observable<List<Repository>> getRepositories(final String login, int repoPage) {
@@ -54,5 +50,9 @@ public class CacheService {
 
     public void setUserRepoPage(String login, int page) {
         USER_CACHE_DATA.get(login).setRepoPage(page);
+    }
+
+    public void deleteCacheAll() {
+        USER_CACHE_DATA.clear();
     }
 }

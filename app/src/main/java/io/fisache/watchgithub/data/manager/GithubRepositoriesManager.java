@@ -49,12 +49,12 @@ public class GithubRepositoriesManager {
     }
 
     @VisibleForTesting
-    public void createRepos(String login, List<RepositoryResponse> repos) {
+    public void createRepos(String login, List<Repository> repos) {
         githubApiService.createGithubRepos(login, repos);
     }
 
     @VisibleForTesting
-    public void updateRepos(String login, List<RepositoryResponse> repos) {
+    public void updateRepos(String login, List<Repository> repos) {
         githubApiService.updateGithubRepos(login, repos);
     }
 

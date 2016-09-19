@@ -38,4 +38,8 @@ public class RepositoriesListHolder extends RecyclerView.ViewHolder {
             tvForked.setText("Origin");
         }
     }
+
+    public String getHolderRepoName() {
+        return tvRepoName.getText().toString();
+    }
 }
