@@ -30,7 +30,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.action.ViewActions.click;
 import static org.junit.Assert.assertTrue;
-import static org.hamcrest.Matchers.containsString;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -62,7 +61,7 @@ public class RepoDetailScreenTest {
 
     @After
     public void tearDwon() {
-
+        app.releaseGithubUserComponent();
     }
 
     @Test

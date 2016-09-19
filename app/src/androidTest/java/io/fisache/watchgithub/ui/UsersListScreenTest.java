@@ -6,9 +6,7 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
-import android.view.View;
 
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -68,6 +66,12 @@ public class UsersListScreenTest {
     @After
     public void tearDown() {
         app.releaseGroupComponent();
+    }
+
+    @Test
+    public void emptyUser_checkNotExist() {
+        onView(withId(R.id.llUserExist)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.llUserNotExist)).check(matches(isDisplayed()));
     }
 
     @Test

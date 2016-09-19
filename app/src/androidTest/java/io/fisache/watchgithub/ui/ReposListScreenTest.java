@@ -34,6 +34,7 @@ import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListHolder;
 import io.fisache.watchgithub.util.DateUtils;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -41,6 +42,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.action.ViewActions.click;
 import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -92,6 +94,17 @@ public class ReposListScreenTest {
         app.releaseGithubUserComponent();
     }
 
+
+    @Test
+    public void emptyRepositories_checkNotExist() {
+        List<Repository> repositories = new ArrayList<>();
+        githubRepositoriesManager.createRepos(user.login, repositories);
+        cacheRepositoriesManager.replaceCache(repositories, 1);
+        launchWithUser();
+
+        onView(withId(R.id.llRepoExist)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.llRepoNotExist)).check(matches(isDisplayed()));
+    }
 
     @Test
     public void createDummyRepositories_checkDisplayed() {
