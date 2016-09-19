@@ -26,6 +26,7 @@ import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
 import io.fisache.watchgithub.mock.ApplicationTest;
 import io.fisache.watchgithub.mock.RepositoryDummy;
+import io.fisache.watchgithub.mock.TestUtils;
 import io.fisache.watchgithub.mock.UserDummy;
 import io.fisache.watchgithub.service.Injection;
 import io.fisache.watchgithub.ui.repositorieslist.RepositoriesListActivity;
@@ -35,9 +36,11 @@ import io.fisache.watchgithub.util.DateUtils;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.action.ViewActions.click;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -132,6 +135,17 @@ public class ReposListScreenTest {
             onView(withId(R.id.rvRepoList)).perform(RecyclerViewActions.scrollToPosition(i));
             onView(withText(repositories.get(i).name)).check(matches(isDisplayed()));
         }
+    }
+
+    @Test
+    public void clickBackBtn_finishActivity() {
+        launchWithUser();
+
+        onView(withContentDescription(TestUtils.getToolbarNavigationContentDescription(
+                repositoriesListActivityTestRule.getActivity(), R.id.toolbar
+        ))).perform(click());
+
+        assertTrue(repositoriesListActivityTestRule.getActivity().isFinishing());
     }
 
     private List<Repository> createDummyRepositories() {

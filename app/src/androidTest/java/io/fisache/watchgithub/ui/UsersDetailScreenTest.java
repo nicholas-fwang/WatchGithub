@@ -20,13 +20,9 @@ import io.fisache.watchgithub.mock.TestUtils;
 import io.fisache.watchgithub.mock.UserDummy;
 import io.fisache.watchgithub.service.Injection;
 import io.fisache.watchgithub.ui.userdetail.UserDetailActivity;
-import rx.Observable;
-
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
-import static android.support.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
