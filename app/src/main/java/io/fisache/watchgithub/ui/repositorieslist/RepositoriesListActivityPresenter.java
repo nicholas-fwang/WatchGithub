@@ -10,6 +10,7 @@ import io.fisache.watchgithub.data.manager.CacheRepositoriesManager;
 import io.fisache.watchgithub.data.manager.GithubRepositoriesManager;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.service.SchedulerProvider;
 import io.fisache.watchgithub.util.DateUtils;
 import rx.Observable;
 import rx.Observer;
@@ -35,6 +36,8 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
     private boolean dataMore = true;
 
     private boolean cached = false;
+
+    private SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
 
     public RepositoriesListActivityPresenter(RepositoriesListActivity activity, User user,
                                              GithubRepositoriesManager githubRepositoriesManager,
@@ -78,8 +81,10 @@ public class RepositoriesListActivityPresenter implements BasePresenter {
                     public void onError(Throwable e) {
                         // cache miss
                         githubRepositoriesManager.getUserRepositories(repoPage)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
+//                                .subscribeOn(Schedulers.io())
+//                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(schedulerProvider.io())
+                                .observeOn(schedulerProvider.ui())
                                 .subscribe(new Observer<List<Repository>>() {
                                     @Override
                                     public void onCompleted() {
