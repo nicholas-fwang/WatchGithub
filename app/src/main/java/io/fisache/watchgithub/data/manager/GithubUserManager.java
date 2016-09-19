@@ -8,6 +8,7 @@ import java.util.List;
 import io.fisache.watchgithub.data.GithubApiService;
 import io.fisache.watchgithub.data.model.UserResponse;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.service.SchedulerProvider;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -15,6 +16,8 @@ import rx.schedulers.Schedulers;
 
 public class GithubUserManager {
     private GithubApiService githubApiService;
+
+    private SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
 
     public GithubUserManager(GithubApiService githubApiService) {
         this.githubApiService = githubApiService;
@@ -36,8 +39,8 @@ public class GithubUserManager {
                         return user;
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui());
     }
 
     public Observable<List<User>> getGithubUsers(List<User> users) {

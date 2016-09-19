@@ -9,6 +9,7 @@ import io.fisache.watchgithub.data.GithubApiService;
 import io.fisache.watchgithub.data.model.RepositoryResponse;
 import io.fisache.watchgithub.data.model.Repository;
 import io.fisache.watchgithub.data.model.User;
+import io.fisache.watchgithub.service.SchedulerProvider;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -17,6 +18,8 @@ import rx.schedulers.Schedulers;
 public class GithubRepositoriesManager {
     private User user;
     private GithubApiService githubApiService;
+
+    private SchedulerProvider schedulerProvider = SchedulerProvider.getInstance();
 
     public GithubRepositoriesManager(User user, GithubApiService githubApiService) {
         this.user = user;
@@ -44,8 +47,8 @@ public class GithubRepositoriesManager {
                         return list;
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui());
     }
 
     @VisibleForTesting
