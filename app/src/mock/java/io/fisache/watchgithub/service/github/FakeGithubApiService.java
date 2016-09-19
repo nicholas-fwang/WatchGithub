@@ -25,7 +25,12 @@ public class FakeGithubApiService implements GithubApiService{
 
     @Override
     public Observable<UserResponse> getGithubUser(String username) {
-        return Observable.just(TestUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
+//        return Observable.just(TestUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
+        if(USER_GITHUB_DATA.get(username) == null) {
+            return Observable.error(new RuntimeException("Not Signed User"));
+        } else {
+            return Observable.just(TestUtils.convertUserToResponse(USER_GITHUB_DATA.get(username)));
+        }
     }
 
     @Override

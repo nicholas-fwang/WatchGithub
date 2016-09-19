@@ -12,7 +12,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner 'io.fisache.watchgithub.mock.MyTestRunner'
+        testInstrumentationRunner 'io.fisache.watchgithub.MyTestRunner'
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
 
@@ -98,6 +99,8 @@ dependencies {
     androidTestCompile "com.google.dexmaker:dexmaker:1.2"
     androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
 
+    androidTestApt 'com.google.dagger:dagger-compiler:2.2'
+    testApt 'com.google.dagger:dagger-compiler:2.2'
     // In-repo dependencies
     // compile project(':projectName')
 }

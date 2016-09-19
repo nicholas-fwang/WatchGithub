@@ -57,8 +57,7 @@ public class FakeSqlbriteService implements BaseService {
     public Observable<List<User>> searchUsersWithPattern(String pattern) {
         List<User> userList = new ArrayList<>();
         for(Long userId : USER_LOCAL_DATA.keySet()) {
-            boolean flag = Pattern.matches("^[a-zA-Z0-9]*$"+pattern+"^[a-zA-Z0-9]*$", USER_LOCAL_DATA.get(userId).login);
-            if(flag) {
+            if(USER_LOCAL_DATA.get(userId).login.contains(pattern)) {
                 userList.add(USER_LOCAL_DATA.get(userId));
             }
         }
