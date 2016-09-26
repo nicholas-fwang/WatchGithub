@@ -89,6 +89,22 @@ Update :  - Update is performed when requests repositories when the repositories
 Delete :  - Cache is implemented with LinkedHashMap of Java, and follows the replacement policy of <a href="https://en.wikipedia.org/wiki/Cache_algorithms#LRU">LRU</a>.
           So, <a href="https://en.wikipedia.org/wiki/Cache_algorithms#LRU">Least Rencently Used</a> data is removed when save new data to cache in full capacity.
 </pre>
+
+# Test
+<pre>
+[Android Test]
+
+VIEW : Used espresso and Fake object for state verification.
+
+</pre>
+<pre>
+[Test]
+
+Presenter and Model : Used JUnit and Stub object implemented with Mockito for state verfication.
+Presenter and Model : Used Mockito and Mock object implemented with Mockito for behaviro verification.
+
+</pre>
+
 # Articles
 1. <a href="https://fisache.github.io/Introduction-WatchGithub/">Introduction to `WatchGithub`</a> <br />
 2. Construct MVP pattern with `Dagger2` <br />
@@ -103,5 +119,3 @@ Delete :  - Cache is implemented with LinkedHashMap of Java, and follows the rep
 10. Connect to cache with remote data(`retrofit`) using `RxJava` <br />
 11. TODO : androidTest and Test with espresso, junit and mockito
 
-# Test
-TODO
